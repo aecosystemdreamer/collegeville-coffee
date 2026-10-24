@@ -420,13 +420,24 @@
   }
 
   // ============ Backend ============
-  async function api(body) {
-    const res = await fetch(SHEET_WEB_APP_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ type: 'admin', key: adminKey, ...body }),
-    });
-    const data = await res.json();
+  async function api(body, retry = true) {
+    let data;
+    try {
+      const res = await fetch(SHEET_WEB_APP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ type: 'admin', key: adminKey, ...body }),
+      });
+      data = await res.json();
+    } catch (e) {
+      // Google sometimes answers the first request after a deploy with an
+      // error page instead of JSON; one quiet retry covers it.
+      if (retry) {
+        await new Promise((r) => setTimeout(r, 1200));
+        return api(body, false);
+      }
+      throw new Error('unreachable');
+    }
     if (data.status !== 'ok') throw new Error(data.error || 'request failed');
     return data;
   }
