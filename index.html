@@ -1370,6 +1370,7 @@
   const PREV_ROAST = (() => { const d = new Date(LAST_ROAST); d.setDate(d.getDate() - 1); while (!ROAST_DAYS.includes(d.getDay())) d.setDate(d.getDate() - 1); return d; })();
   const shortDate = (d) => `${DAY[d.getDay()]} ${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
   const longDate = (d) => `${DAY_LONG[d.getDay()]}, ${MONTH[d.getMonth()]} ${d.getDate()}`;
+  const isoDate = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   const batchNo = (id) => `No. ${String(ROAST_LOG[id].batch).padStart(3, '0')}`;
   const roastedOn = (id) => (ROAST_LOG[id].day === 'last' ? LAST_ROAST : PREV_ROAST);
 
@@ -1764,10 +1765,14 @@
         <div class="field"><label for="coEmail">Email</label><input id="coEmail" type="email" required autocomplete="email"></div>
         <div class="field"><label for="coPhone">Phone (optional)</label><input id="coPhone" type="tel" autocomplete="tel"></div>
         <div id="addrFields" ${fulfil === 'pickup' ? 'hidden' : ''}>
-          <div class="field"><label for="coAddr">Street address</label><input id="coAddr" autocomplete="street-address"></div>
+          <div class="field"><label for="coAddr">Street address</label><input id="coAddr" autocomplete="address-line1"></div>
           <div class="field-row">
             <div class="field"><label for="coCity">City</label><input id="coCity" autocomplete="address-level2"></div>
-            <div class="field"><label for="coZip">ZIP</label><input id="coZip" autocomplete="postal-code" inputmode="numeric"></div>
+            <div class="field"><label for="coState">State</label><input id="coState" autocomplete="address-level1" maxlength="2" value="PA" style="text-transform:uppercase"></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="coZip">ZIP</label><input id="coZip" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{5}(-[0-9]{4})?"></div>
+            <div class="field"><label for="coApt">Apt, suite (optional)</label><input id="coApt" autocomplete="address-line2"></div>
           </div>
         </div>
         <div class="field"><label for="coNotes">Anything else? (optional)</label><textarea id="coNotes" rows="2"></textarea></div>
@@ -1812,7 +1817,7 @@
   function placeOrder() {
     const form = $('checkoutForm');
     const needAddr = fulfil === 'ship';
-    ['coAddr', 'coCity', 'coZip'].forEach((id) => { $(id).required = needAddr; });
+    ['coAddr', 'coCity', 'coState', 'coZip'].forEach((id) => { $(id).required = needAddr; });
     if (!form.reportValidity()) return;
 
     const t = totals();
@@ -1825,8 +1830,13 @@
       email: $('coEmail').value.trim(),
       phone: $('coPhone').value.trim(),
       fulfillment: fulfil,
-      address: needAddr ? `${$('coAddr').value.trim()}, ${$('coCity').value.trim()} ${$('coZip').value.trim()}` : '',
+      street: needAddr ? [$('coAddr').value.trim(), $('coApt').value.trim()].filter(Boolean).join(', ') : '',
+      city: needAddr ? $('coCity').value.trim() : '',
+      state: needAddr ? $('coState').value.trim().toUpperCase() : '',
+      zip: needAddr ? $('coZip').value.trim() : '',
+      address: needAddr ? `${[$('coAddr').value.trim(), $('coApt').value.trim()].filter(Boolean).join(', ')}, ${$('coCity').value.trim()}, ${$('coState').value.trim().toUpperCase()} ${$('coZip').value.trim()}` : '',
       notes: $('coNotes').value.trim(),
+      roastDate: isoDate(NEXT_ROAST),
       items: cart.map((l) => ({ sku: l.sku, name: l.name, detail: l.meta, giftNote: l.note || '', qty: l.qty, unitPrice: l.price })),
       subtotal: t.sub,
       shipping: t.ship,

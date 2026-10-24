@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Packing Station · Collegeville Coffee Roasters</title>
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+  /* Same palette and type as the shop: cool neutrals, espresso, teal. */
+  :root {
+    --brown: #2a1a12;
+    --brown-soft: #5c5753;
+    --paper: #f7f8f7;
+    --sand: #eceeed;
+    --white: #ffffff;
+    --accent: #1f6f68;
+    --accent-dark: #144a45;
+    --accent-tint: #e7f1ef;
+    --warn: #9a3b2e;
+    --line: rgba(42,26,18,0.14);
+    --line-strong: rgba(42,26,18,0.4);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+    --hand: 'Caveat', 'Bradley Hand', cursive;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    font-size: 14px;
+    background: var(--paper);
+    color: var(--brown);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.1; }
+
+  .label { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 760px) { .wrap { padding: 0 32px; } }
+
+  button { font: inherit; color: inherit; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1px solid var(--brown);
+    border-radius: 2px;
+    background: var(--brown);
+    color: var(--white);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .btn:hover { background: var(--accent); border-color: var(--accent); }
+  .btn.ghost { background: var(--white); color: var(--brown); }
+  .btn.ghost:hover { border-color: var(--accent); color: var(--accent); background: var(--white); }
+  .btn.small { padding: 7px 11px; font-size: 10px; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  input, select, textarea {
+    font: 400 14px var(--sans);
+    color: var(--brown);
+    padding: 10px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 2px;
+    background: var(--white);
+  }
+
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); }
+
+  /* ============ Lock screen ============ */
+  .lock { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+  .lock-card { width: min(420px, 100%); background: var(--white); border: 1px solid var(--line); padding: 36px; }
+  .lock-card h1 { font-size: 38px; margin: 8px 0 8px; }
+  .lock-card p { color: var(--brown-soft); margin-bottom: 20px; }
+  .lock-card form { display: grid; gap: 12px; }
+  .lock-card .remember { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--brown-soft); }
+  .lock-card .remember input { width: 15px; height: 15px; accent-color: var(--accent); padding: 0; }
+  .lock-card .or { text-align: center; font-size: 12px; color: var(--brown-soft); margin: 18px 0 10px; }
+  .err { color: var(--warn); font-size: 13px; min-height: 18px; }
+
+  /* ============ Top bar ============ */
+  .top { background: var(--white); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 20; }
+  .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+  .top h1 { font-size: 24px; }
+  .top h1 small { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brown-soft); margin-left: 10px; }
+  .top-actions { display: flex; gap: 8px; align-items: center; }
+  .synced { font-size: 12px; color: var(--brown-soft); }
+  .demo-flag { background: var(--accent-tint); color: var(--accent-dark); padding: 4px 8px; }
+
+  main { padding: 28px 0 80px; }
+
+  /* ============ Roast plan ============ */
+  .grid-top { display: grid; gap: 20px; margin-bottom: 28px; }
+  @media (min-width: 980px) { .grid-top { grid-template-columns: 1.4fr 1fr; } }
+
+  .panel { background: var(--white); border: 1px solid var(--line); padding: 22px; }
+  .panel-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+  .panel-head h2 { font-size: 28px; }
+  .panel-head h2 em { font-style: italic; color: var(--accent); }
+
+  .plan-table { width: 100%; border-collapse: collapse; }
+  .plan-table th { text-align: left; padding: 0 8px 8px 0; color: var(--brown-soft); }
+  .plan-table td { padding: 10px 8px 10px 0; border-top: 1px solid var(--line); vertical-align: top; }
+  .plan-table td.coffee { font-family: var(--serif); font-style: italic; font-size: 20px; }
+  .plan-table td.num { font-family: var(--mono); text-align: right; white-space: nowrap; }
+  .plan-table .grinds { font-size: 12px; color: var(--brown-soft); }
+  .plan-total { display: flex; justify-content: space-between; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line-strong); font-family: var(--mono); font-size: 13px; }
+  .empty { color: var(--brown-soft); padding: 18px 0; }
+
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .stat { background: var(--paper); padding: 14px; }
+  .stat b { display: block; font-family: var(--serif); font-size: 34px; font-weight: 500; line-height: 1; margin-top: 6px; }
+
+  /* ============ Queue ============ */
+  .queue-bar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .tabs button {
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--white);
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .tabs button[aria-pressed="true"] { background: var(--brown); border-color: var(--brown); color: var(--white); }
+  .tabs .count { font-family: var(--mono); font-size: 11px; margin-left: 4px; opacity: 0.7; }
+
+  .search { min-width: 220px; }
+
+  .bulk {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    background: var(--accent-tint);
+    border: 1px solid rgba(31,111,104,0.25);
+  }
+
+  .bulk .sel { font-size: 13px; margin-right: auto; color: var(--accent-dark); }
+
+  .orders { display: grid; gap: 10px; }
+
+  .order {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 14px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    padding: 16px;
+  }
+
+  .order.is-selected { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+  .order input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent); margin-top: 4px; padding: 0; }
+
+  .o-body { display: grid; gap: 14px; }
+  @media (min-width: 900px) { .o-body { grid-template-columns: 1.1fr 1.4fr 1fr; align-items: start; } }
+
+  .o-who h3 { font-size: 22px; font-weight: 600; }
+  .o-meta { font-family: var(--mono); font-size: 11px; color: var(--brown-soft); letter-spacing: 0.04em; margin-top: 4px; }
+  .o-addr { font-size: 13px; color: var(--brown-soft); margin-top: 6px; }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border: 1px solid currentColor;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-right: 6px;
+  }
+
+  .badge.ship { color: var(--brown); }
+  .badge.pickup { color: var(--accent); }
+
+  .o-items { list-style: none; }
+  .o-items li { padding: 6px 0; border-bottom: 1px solid var(--line); display: flex; gap: 10px; }
+  .o-items li:first-child { padding-top: 0; }
+  .o-items .q { font-family: var(--mono); min-width: 24px; }
+  .o-items .grind { color: var(--accent-dark); font-weight: 500; }
+  .o-note { font-family: var(--hand); font-size: 20px; line-height: 1.15; color: var(--accent-dark); margin-top: 8px; }
+  .o-cnote { font-size: 12px; color: var(--brown-soft); margin-top: 6px; }
+
+  .o-side { display: grid; gap: 10px; justify-items: start; }
+  @media (min-width: 900px) { .o-side { justify-items: end; text-align: right; } }
+  .o-total { font-family: var(--serif); font-size: 26px; }
+
+  .steps { display: flex; gap: 3px; }
+  .steps i { width: 22px; height: 4px; background: var(--sand); }
+  .steps i.on { background: var(--accent); }
+
+  .o-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+  @media (min-width: 900px) { .o-actions { justify-content: flex-end; } }
+  .o-actions select { padding: 6px 8px; font-size: 12px; }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translate(-50%, 120px);
+    background: var(--brown);
+    color: var(--white);
+    padding: 12px 18px;
+    font-size: 13px;
+    z-index: 50;
+    transition: transform 0.25s ease;
+  }
+
+  .toast.show { transform: translate(-50%, 0); }
+
+  /* ============ Settings ============ */
+  details.settings { margin-top: 28px; background: var(--white); border: 1px solid var(--line); padding: 16px 20px; }
+  details.settings summary { cursor: pointer; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .settings-grid { display: grid; gap: 16px; margin-top: 16px; }
+  @media (min-width: 760px) { .settings-grid { grid-template-columns: 1fr 1fr; } }
+  .settings-grid label { display: grid; gap: 6px; font-size: 13px; color: var(--brown-soft); }
+
+  /* ============ Print ============ */
+  #printArea { display: none; }
+
+  @media print {
+    body { background: #fff; }
+    #app, #lock, .toast { display: none !important; }
+    #printArea { display: block; }
+  }
+
+  .sheet { page-break-after: always; break-after: page; position: relative; overflow: hidden; color: #000; }
+  .sheet:last-child { page-break-after: auto; break-after: auto; }
+
+  /* 4x6 shipping label */
+  .lbl { width: 4in; height: 6in; padding: 0.25in; display: flex; flex-direction: column; font-family: var(--sans); }
+  .lbl-from { font-size: 9pt; line-height: 1.3; white-space: pre-line; padding-bottom: 0.12in; border-bottom: 1.5pt solid #000; }
+  .lbl-from b { font-family: var(--mono); font-size: 7.5pt; letter-spacing: 0.08em; display: block; margin-bottom: 2pt; }
+  .lbl-to { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0.15in 0.1in; }
+  .lbl-to b { font-family: var(--mono); font-size: 8pt; letter-spacing: 0.1em; margin-bottom: 6pt; }
+  .lbl-to .name { font-size: 20pt; font-weight: 600; line-height: 1.1; }
+  .lbl-to .addr { font-size: 15pt; line-height: 1.3; margin-top: 4pt; white-space: pre-line; }
+  .lbl-pickup { font-family: var(--mono); font-size: 26pt; letter-spacing: 0.06em; border: 2pt solid #000; padding: 6pt 10pt; align-self: flex-start; margin-bottom: 10pt; }
+  .lbl-foot { border-top: 1.5pt solid #000; padding-top: 0.1in; font-family: var(--mono); font-size: 8pt; line-height: 1.4; display: flex; justify-content: space-between; gap: 8pt; }
+  .lbl-foot .items { max-width: 2.6in; }
+  .lbl-foot .no { font-size: 13pt; font-weight: 500; text-align: right; white-space: nowrap; }
+
+  /* note card, 4 per Letter page with cut lines */
+  .note-page { width: 8.5in; height: 11in; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+  .card { border: 0.5pt dashed #999; padding: 0.45in 0.4in 0.35in; display: flex; flex-direction: column; }
+  .card-inner { flex: 1; border: 1pt solid #1f6f68; padding: 0.3in 0.28in; display: flex; flex-direction: column; text-align: center; }
+  .card-top { font-family: var(--mono); font-size: 7.5pt; letter-spacing: 0.12em; color: #1f6f68; text-transform: uppercase; }
+  .card-note { flex: 1; display: flex; align-items: center; justify-content: center; font-family: var(--hand); font-size: 26pt; line-height: 1.15; color: #144a45; padding: 0.15in 0; overflow-wrap: anywhere; }
+  .card-foot { font-family: var(--serif); font-style: italic; font-size: 11pt; color: #2a1a12; }
+  .card-foot small { display: block; font-family: var(--mono); font-style: normal; font-size: 7pt; letter-spacing: 0.08em; color: #5c5753; margin-top: 4pt; }
+
+  /* packing slip, Letter */
+  .slip { width: 8.5in; min-height: 11in; padding: 0.7in; font-family: var(--sans); font-size: 11pt; }
+  .slip-head { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1.5pt solid #000; padding-bottom: 12pt; margin-bottom: 18pt; }
+  .slip-head h2 { font-family: var(--serif); font-size: 26pt; }
+  .slip-head .no { font-family: var(--mono); font-size: 12pt; text-align: right; }
+  .slip-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24pt; margin-bottom: 20pt; }
+  .slip-cols b { font-family: var(--mono); font-size: 8pt; letter-spacing: 0.1em; display: block; margin-bottom: 4pt; }
+  .slip table { width: 100%; border-collapse: collapse; margin-bottom: 18pt; }
+  .slip th { text-align: left; font-family: var(--mono); font-size: 8pt; letter-spacing: 0.1em; border-bottom: 1pt solid #000; padding: 4pt 6pt 4pt 0; }
+  .slip td { padding: 8pt 6pt 8pt 0; border-bottom: 0.5pt solid #bbb; vertical-align: top; }
+  .slip .note { font-family: var(--hand); font-size: 18pt; color: #144a45; }
+  .slip .checks { display: flex; gap: 24pt; font-size: 10pt; margin-top: 10pt; }
+  .slip .checks span::before { content: "☐ "; font-size: 13pt; }
+  .slip .thanks { margin-top: 28pt; font-family: var(--serif); font-style: italic; font-size: 15pt; }
+</style>
+</head>
+<body>
+
+<!-- ============ Lock screen ============ -->
+<div class="lock" id="lock">
+  <div class="lock-card">
+    <p class="label" style="color:var(--accent)">Collegeville Coffee Roasters</p>
+    <h1>Packing station</h1>
+    <p>Enter the admin key you saved in the order script's settings.</p>
+    <form id="lockForm">
+      <input type="password" id="keyInput" placeholder="Admin key" autocomplete="current-password" required aria-label="Admin key">
+      <label class="remember"><input type="checkbox" id="rememberKey" checked> Remember on this device</label>
+      <button class="btn" type="submit">Unlock</button>
+      <p class="err" id="lockErr" role="alert"></p>
+    </form>
+    <p class="or">or</p>
+    <button class="btn ghost" id="demoBtn" style="width:100%">Try it with sample orders</button>
+  </div>
+</div>
+
+<!-- ============ App ============ -->
+<div id="app" hidden>
+  <header class="top">
+    <div class="wrap">
+      <h1>Packing station <small id="modeLabel"></small></h1>
+      <div class="top-actions">
+        <span class="synced" id="synced"></span>
+        <button class="btn ghost small" id="refreshBtn">Refresh</button>
+        <button class="btn ghost small" id="lockBtn">Lock</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="grid-top">
+      <section class="panel" aria-labelledby="planTitle">
+        <div class="panel-head">
+          <h2 id="planTitle">Roast plan for <em id="planDay"></em></h2>
+          <select id="planDate" aria-label="Roast day"></select>
+        </div>
+        <div id="plan"></div>
+      </section>
+      <section class="panel" aria-label="Today">
+        <div class="panel-head"><h2>At a glance</h2></div>
+        <div class="stats" id="stats"></div>
+      </section>
+    </div>
+
+    <div class="queue-bar">
+      <div class="tabs" id="tabs" role="toolbar" aria-label="Filter by status"></div>
+      <input type="search" class="search" id="search" placeholder="Search name, order, coffee" aria-label="Search orders">
+    </div>
+
+    <div class="bulk" id="bulk">
+      <span class="sel" id="selInfo"></span>
+      <button class="btn small" data-print="labels">Print labels</button>
+      <button class="btn small" data-print="notes">Print note cards</button>
+      <button class="btn small" data-print="slips">Print packing slips</button>
+      <button class="btn ghost small" id="csvBtn">Download CSV</button>
+      <button class="btn ghost small" id="pirateBtn">Pirate Ship CSV</button>
+      <button class="btn ghost small" id="advanceBtn">Move to next step</button>
+    </div>
+
+    <div class="orders" id="orders"></div>
+
+    <details class="settings">
+      <summary>Label settings</summary>
+      <div class="settings-grid">
+        <label>Return address (printed on every shipping label)
+          <textarea id="fromAddr" rows="4"></textarea>
+        </label>
+        <label>Shipping label size
+          <select id="labelSize">
+            <option value="4x6">4 × 6 in (label printer or Pirate Ship)</option>
+            <option value="letter">Letter paper, 2 labels per page</option>
+          </select>
+        </label>
+      </div>
+    </details>
+  </main>
+</div>
+
+<div id="printArea" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  // Same web app URL as the shop page. The admin key is checked by the script.
+  const SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzmACWmS0GQzxz_v-LaXsAUknQzkipazFIAux17T3qX313l93D4RjLw0OyIYBoPKL3w/exec';
+
+  const STATUSES = ['New', 'Paid', 'Roasted', 'Packed', 'Done'];
+  const NEXT_ACTION = { New: 'Mark paid', Paid: 'Mark roasted', Roasted: 'Mark packed', Packed: 'Mark shipped' };
+  const COFFEES = { GUA: 'Guatemala', ETH: 'Ethiopia', COL: 'Colombia', HON: 'Honduras', PRK: 'Perkiomen Blend' };
+  const SIZES = { '12': { label: '12 oz', oz: 12, shipOz: 14 }, '32': { label: '2 lb', oz: 32, shipOz: 35 }, '80': { label: '5 lb', oz: 80, shipOz: 84 } };
+  const GRINDS = { WB: 'Whole bean', ES: 'Espresso', PO: 'Pour-over', DR: 'Drip', FP: 'French press', CB: 'Cold brew' };
+  const STORE = { key: 'ccr_admin_key', from: 'ccr_admin_from', size: 'ccr_admin_label' };
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (v) => String(v == null ? '' : v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const money = (n) => '$' + Number(n).toFixed(2).replace(/\.00$/, '');
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+    del(k) { try { localStorage.removeItem(k); } catch (e) {} },
+  };
+
+  let adminKey = '';
+  let demo = false;
+  let orders = [];
+  let filter = 'active';
+  let query = '';
+  const selected = new Set();
+
+  function toast(text) {
+    const t = $('toast');
+    t.textContent = text;
+    t.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => t.classList.remove('show'), 2600);
+  }
+
+  // SKU looks like CCR-ETH-12-PO: coffee, size, grind
+  function parseSku(sku) {
+    const [, bean, size, grind] = String(sku).split('-');
+    return { bean, size, grind };
+  }
+
+  function dayLabel(iso) {
+    if (!iso) return 'No roast day';
+    const d = new Date(iso + 'T12:00:00');
+    return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  }
+
+  // ============ Backend ============
+  async function api(body) {
+    const res = await fetch(SHEET_WEB_APP_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ type: 'admin', key: adminKey, ...body }),
+    });
+    const data = await res.json();
+    if (data.status !== 'ok') throw new Error(data.error || 'request failed');
+    return data;
+  }
+
+  async function load() {
+    $('synced').textContent = 'Loading…';
+    try {
+      orders = demo ? demoOrders() : (await api({ action: 'list' })).orders;
+      $('synced').textContent = `Updated ${new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`;
+      render();
+      return true;
+    } catch (e) {
+      $('synced').textContent = '';
+      throw e;
+    }
+  }
+
+  async function setStatus(order, value) {
+    const before = order.status;
+    order.status = value;
+    render();
+    if (demo) return;
+    try {
+      await api({ action: 'setStatus', orderNo: order.orderNo, value });
+    } catch (e) {
+      order.status = before;
+      render();
+      toast(`Couldn't update ${order.orderNo}. Check your connection and try again.`);
+    }
+  }
+
+  // ============ Lock ============
+  async function unlock(key, remember) {
+    adminKey = key;
+    demo = false;
+    $('lockErr').textContent = '';
+    try {
+      await load();
+      if (remember) store.set(STORE.key, key);
+      showApp();
+    } catch (e) {
+      adminKey = '';
+      store.del(STORE.key);
+      $('lockErr').textContent = e.message === 'wrong key'
+        ? "That key doesn't match the one in the script's settings."
+        : "Couldn't reach the order sheet. Make sure the script is updated and deployed.";
+    }
+  }
+
+  function showApp() {
+    $('lock').hidden = true;
+    $('lock').style.display = 'none';
+    $('app').hidden = false;
+    $('modeLabel').innerHTML = demo ? '<span class="demo-flag">Sample orders</span>' : '';
+  }
+
+  $('lockForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    unlock($('keyInput').value.trim(), $('rememberKey').checked);
+  });
+
+  $('demoBtn').addEventListener('click', async () => {
+    demo = true;
+    await load();
+    showApp();
+  });
+
+  $('lockBtn').addEventListener('click', () => {
+    store.del(STORE.key);
+    location.reload();
+  });
+
+  $('refreshBtn').addEventListener('click', () => load().catch(() => toast("Couldn't refresh. Try again in a moment.")));
+
+  // ============ Render ============
+  function visibleOrders() {
+    const q = query.toLowerCase();
+    return orders.filter((o) => {
+      if (filter === 'active' && o.status === 'Done') return false;
+      if (filter !== 'active' && filter !== 'all' && o.status !== filter) return false;
+      if (!q) return true;
+      const hay = [o.orderNo, o.name, o.email, o.city, ...o.items.map((i) => i.name)].join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+  }
+
+  function render() {
+    renderTabs();
+    renderPlan();
+    renderStats();
+    renderOrders();
+  }
+
+  function renderTabs() {
+    const count = (s) => orders.filter((o) => o.status === s).length;
+    const tabs = [['active', 'To do', orders.filter((o) => o.status !== 'Done').length], ...STATUSES.map((s) => [s, s === 'Done' ? 'Done' : s, count(s)]), ['all', 'All', orders.length]];
+    $('tabs').innerHTML = tabs.map(([v, label, n]) =>
+      `<button type="button" data-filter="${v}" aria-pressed="${filter === v}">${label}<span class="count">${n}</span></button>`).join('');
+  }
+
+  function renderPlan() {
+    const days = [...new Set(orders.filter((o) => o.status !== 'Done').map((o) => o.roastDate).filter(Boolean))].sort();
+    const current = days.includes($('planDate').value) ? $('planDate').value : days[0] || '';
+    $('planDate').innerHTML = days.map((d) => `<option value="${d}" ${d === current ? 'selected' : ''}>${dayLabel(d)}</option>`).join('') || '<option>No upcoming roasts</option>';
+    $('planDay').textContent = current ? dayLabel(current) : 'the next roast';
+
+    // bags still to roast: anything not yet marked roasted
+    const rows = {};
+    let totalOz = 0;
+    orders.filter((o) => o.roastDate === current && (o.status === 'New' || o.status === 'Paid')).forEach((o) => {
+      o.items.forEach((i) => {
+        const { bean, size, grind } = parseSku(i.sku);
+        if (!COFFEES[bean] || !SIZES[size]) return;
+        const key = `${bean}-${size}`;
+        const r = rows[key] = rows[key] || { bean, size, bags: 0, grinds: {} };
+        r.bags += i.qty;
+        r.grinds[grind] = (r.grinds[grind] || 0) + i.qty;
+        totalOz += SIZES[size].oz * i.qty;
+      });
+    });
+
+    const list = Object.values(rows).sort((a, b) => COFFEES[a.bean].localeCompare(COFFEES[b.bean]) || a.size - b.size);
+    if (!list.length) {
+      $('plan').innerHTML = '<p class="empty">Nothing left to roast for this day. Paid and new orders show up here.</p>';
+      return;
+    }
+    $('plan').innerHTML = `
+      <table class="plan-table">
+        <thead><tr><th class="label">Coffee</th><th class="label">Size</th><th class="label">Grind</th><th class="label" style="text-align:right">Bags</th></tr></thead>
+        <tbody>${list.map((r) => `
+          <tr>
+            <td class="coffee">${COFFEES[r.bean]}</td>
+            <td>${SIZES[r.size].label}</td>
+            <td class="grinds">${Object.entries(r.grinds).map(([g, n]) => `${n} ${GRINDS[g] || g}`).join(' · ')}</td>
+            <td class="num">${r.bags}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+      <div class="plan-total"><span>Roast at least</span><span>${(totalOz / 16).toFixed(1)} lb finished coffee</span></div>`;
+  }
+
+  function renderStats() {
+    const active = orders.filter((o) => o.status !== 'Done');
+    const notes = active.reduce((n, o) => n + o.items.filter((i) => i.note).length, 0);
+    const owed = orders.filter((o) => o.status === 'New').reduce((n, o) => n + o.total, 0);
+    $('stats').innerHTML = [
+      ['Waiting on payment', orders.filter((o) => o.status === 'New').length, money(owed) + ' to collect'],
+      ['Ready to pack', orders.filter((o) => o.status === 'Roasted').length, 'roasted, not packed'],
+      ['Notes to write', notes, 'handwritten tags'],
+      ['Pickups', active.filter((o) => o.delivery === 'Pickup').length, 'in Collegeville'],
+    ].map(([label, n, sub]) => `<div class="stat"><span class="label">${label}</span><b>${n}</b><span style="font-size:12px;color:var(--brown-soft)">${sub}</span></div>`).join('');
+  }
+
+  function renderOrders() {
+    const list = visibleOrders();
+    [...selected].forEach((no) => { if (!list.some((o) => o.orderNo === no)) selected.delete(no); });
+
+    $('selInfo').textContent = selected.size
+      ? `${selected.size} selected`
+      : `No orders selected. Actions apply to all ${list.length} shown.`;
+
+    if (!list.length) {
+      $('orders').innerHTML = '<div class="panel empty">No orders here. New orders from the shop land in "New".</div>';
+      return;
+    }
+
+    $('orders').innerHTML = list.map((o) => {
+      const step = STATUSES.indexOf(o.status);
+      const notes = o.items.filter((i) => i.note);
+      return `
+      <article class="order ${selected.has(o.orderNo) ? 'is-selected' : ''}">
+        <input type="checkbox" data-select="${esc(o.orderNo)}" ${selected.has(o.orderNo) ? 'checked' : ''} aria-label="Select ${esc(o.orderNo)}">
+        <div class="o-body">
+          <div class="o-who">
+            <h3>${esc(o.name)}</h3>
+            <p class="o-meta">${esc(o.orderNo)} · ${new Date(o.received).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} · roast ${esc(dayLabel(o.roastDate))}</p>
+            <p class="o-addr"><span class="badge ${o.delivery === 'Pickup' ? 'pickup' : 'ship'}">${o.delivery === 'Pickup' ? 'Pickup' : 'Ship'}</span>${o.delivery === 'Pickup' ? esc(o.phone || o.email) : esc(o.address)}</p>
+          </div>
+          <div>
+            <ul class="o-items">${o.items.map((i) => {
+              const { grind } = parseSku(i.sku);
+              return `<li><span class="q">${i.qty}×</span><span>${esc(i.name)} · <span class="grind">${esc(GRINDS[grind] || i.detail)}</span></span></li>`;
+            }).join('')}</ul>
+            ${notes.map((i) => `<p class="o-note">“${esc(i.note)}”</p>`).join('')}
+            ${o.customerNotes ? `<p class="o-cnote">Customer: ${esc(o.customerNotes)}</p>` : ''}
+          </div>
+          <div class="o-side">
+            <span class="o-total">${money(o.total)}</span>
+            <div class="steps" title="${esc(o.status)}">${STATUSES.map((s, i) => `<i class="${i <= step ? 'on' : ''}"></i>`).join('')}</div>
+            <div class="o-actions">
+              ${NEXT_ACTION[o.status] ? `<button class="btn small" data-next="${esc(o.orderNo)}">${o.status === 'Packed' && o.delivery === 'Pickup' ? 'Mark picked up' : NEXT_ACTION[o.status]}</button>` : ''}
+              <select data-status="${esc(o.orderNo)}" aria-label="Status for ${esc(o.orderNo)}">
+                ${STATUSES.map((s) => `<option ${s === o.status ? 'selected' : ''}>${s}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+        </div>
+      </article>`;
+    }).join('');
+  }
+
+  // ============ Interactions ============
+  $('tabs').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-filter]');
+    if (!b) return;
+    filter = b.dataset.filter;
+    render();
+  });
+
+  $('search').addEventListener('input', (e) => { query = e.target.value.trim(); renderOrders(); });
+  $('planDate').addEventListener('change', renderPlan);
+
+  $('orders').addEventListener('change', (e) => {
+    const t = e.target;
+    if (t.dataset.select) {
+      t.checked ? selected.add(t.dataset.select) : selected.delete(t.dataset.select);
+      renderOrders();
+    }
+    if (t.dataset.status) {
+      const o = orders.find((x) => x.orderNo === t.dataset.status);
+      if (o) setStatus(o, t.value);
+    }
+  });
+
+  $('orders').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-next]');
+    if (!b) return;
+    const o = orders.find((x) => x.orderNo === b.dataset.next);
+    if (o) setStatus(o, STATUSES[STATUSES.indexOf(o.status) + 1]);
+  });
+
+  // selected orders, or everything currently shown if nothing is ticked
+  function targets() {
+    const list = visibleOrders();
+    return selected.size ? list.filter((o) => selected.has(o.orderNo)) : list;
+  }
+
+  $('advanceBtn').addEventListener('click', () => {
+    const list = targets().filter((o) => o.status !== 'Done');
+    if (!list.length) return toast('Nothing to move forward.');
+    if (!confirm(`Move ${list.length} order${list.length > 1 ? 's' : ''} to the next step?`)) return;
+    list.forEach((o) => setStatus(o, STATUSES[STATUSES.indexOf(o.status) + 1]));
+    selected.clear();
+  });
+
+  // ============ Settings ============
+  const DEFAULT_FROM = 'Collegeville Coffee Roasters\n(your street address)\nCollegeville, PA 19426';
+  $('fromAddr').value = store.get(STORE.from) || DEFAULT_FROM;
+  $('labelSize').value = store.get(STORE.size) || '4x6';
+  $('fromAddr').addEventListener('input', (e) => store.set(STORE.from, e.target.value));
+  $('labelSize').addEventListener('change', (e) => store.set(STORE.size, e.target.value));
+
+  // ============ Printables ============
+  function itemsLine(o) {
+    return o.items.map((i) => {
+      const { bean, size, grind } = parseSku(i.sku);
+      return `${i.qty}× ${COFFEES[bean] || i.name} ${SIZES[size] ? SIZES[size].label : ''} ${GRINDS[grind] || ''}`.trim();
+    }).join(', ');
+  }
+
+  function labelHTML(o) {
+    const from = esc($('fromAddr').value || DEFAULT_FROM);
+    const to = o.delivery === 'Pickup'
+      ? `<div class="lbl-pickup">PICKUP</div><span class="name">${esc(o.name)}</span><span class="addr">${esc(o.phone || o.email)}</span>`
+      : `<b>SHIP TO</b><span class="name">${esc(o.name)}</span><span class="addr">${o.street ? `${esc(o.street)}\n${esc(o.city)}, ${esc(o.state)} ${esc(o.zip)}` : esc(o.address).replace(/, /, '\n')}</span>`;
+    return `
+      <div class="lbl">
+        <div class="lbl-from"><b>FROM</b>${from}</div>
+        <div class="lbl-to">${to}</div>
+        <div class="lbl-foot"><span class="items">${esc(itemsLine(o))}<br>Roasted ${esc(dayLabel(o.roastDate))}</span><span class="no">${esc(o.orderNo)}</span></div>
+      </div>`;
+  }
+
+  function noteCardHTML(o, item) {
+    const { bean } = parseSku(item.sku);
+    return `
+      <div class="card"><div class="card-inner">
+        <span class="card-top">A note for you</span>
+        <span class="card-note">${esc(item.note)}</span>
+        <span class="card-foot">${esc(COFFEES[bean] || item.name)}, roasted ${esc(dayLabel(o.roastDate))}<small>Collegeville Coffee Roasters · ${esc(o.orderNo)}</small></span>
+      </div></div>`;
+  }
+
+  function slipHTML(o) {
+    return `
+      <div class="slip">
+        <div class="slip-head">
+          <div><p style="font-family:var(--mono);font-size:8pt;letter-spacing:.1em">COLLEGEVILLE COFFEE ROASTERS</p><h2>Packing slip</h2></div>
+          <div class="no">${esc(o.orderNo)}<br><span style="font-size:9pt">Ordered ${new Date(o.received).toLocaleDateString('en-US')}</span><br><span style="font-size:9pt">Roast ${esc(dayLabel(o.roastDate))}</span></div>
+        </div>
+        <div class="slip-cols">
+          <div><b>${o.delivery === 'Pickup' ? 'PICKUP FOR' : 'SHIP TO'}</b>${esc(o.name)}<br>${o.delivery === 'Pickup' ? esc(o.phone || o.email) : (o.street ? `${esc(o.street)}<br>${esc(o.city)}, ${esc(o.state)} ${esc(o.zip)}` : esc(o.address))}</div>
+          <div><b>CONTACT</b>${esc(o.email)}${o.phone ? '<br>' + esc(o.phone) : ''}</div>
+        </div>
+        <table>
+          <thead><tr><th>QTY</th><th>COFFEE</th><th>SIZE</th><th>GRIND</th><th>PACKED</th></tr></thead>
+          <tbody>${o.items.map((i) => {
+            const { bean, size, grind } = parseSku(i.sku);
+            return `<tr><td>${i.qty}</td><td>${esc(COFFEES[bean] || i.name)}</td><td>${SIZES[size] ? SIZES[size].label : ''}</td><td><b>${esc(GRINDS[grind] || i.detail)}</b></td><td>☐</td></tr>
+              ${i.note ? `<tr><td></td><td colspan="4" class="note">Tag: “${esc(i.note)}”</td></tr>` : ''}`;
+          }).join('')}</tbody>
+        </table>
+        ${o.customerNotes ? `<p><b style="font-family:var(--mono);font-size:8pt;letter-spacing:.1em">CUSTOMER NOTE</b><br>${esc(o.customerNotes)}</p>` : ''}
+        <div class="checks"><span>Bags sealed</span><span>Roast date on bag</span><span>Note tag tied</span><span>Label on box</span></div>
+        <p class="thanks">Thank you for supporting a small roaster in Collegeville.</p>
+      </div>`;
+  }
+
+  function printDoc(kind) {
+    const list = targets();
+    let pages = '';
+    let pageCss = '@page { size: letter; margin: 0; }';
+
+    if (kind === 'labels') {
+      if (!list.length) return toast('No orders to print labels for.');
+      if ($('labelSize').value === '4x6') {
+        pageCss = '@page { size: 4in 6in; margin: 0; }';
+        pages = list.map((o) => `<div class="sheet">${labelHTML(o)}</div>`).join('');
+      } else {
+        // two 4x6 labels side by side on Letter paper
+        for (let i = 0; i < list.length; i += 2) {
+          pages += `<div class="sheet" style="width:8.5in;height:11in;display:flex;justify-content:space-around;align-items:center">${list.slice(i, i + 2).map((o) => `<div style="border:0.5pt dashed #999">${labelHTML(o)}</div>`).join('')}</div>`;
+        }
+      }
+    }
+
+    if (kind === 'notes') {
+      const cards = list.flatMap((o) => o.items.filter((i) => i.note).map((i) => noteCardHTML(o, i)));
+      if (!cards.length) return toast('None of these orders have a note.');
+      for (let i = 0; i < cards.length; i += 4) {
+        const four = cards.slice(i, i + 4);
+        while (four.length < 4) four.push('<div class="card" style="border-color:transparent"></div>');
+        pages += `<div class="sheet note-page">${four.join('')}</div>`;
+      }
+    }
+
+    if (kind === 'slips') {
+      if (!list.length) return toast('No orders to print slips for.');
+      pages = list.map((o) => `<div class="sheet">${slipHTML(o)}</div>`).join('');
+    }
+
+    $('printArea').innerHTML = `<style>${pageCss}</style>${pages}`;
+    // give the handwriting font a moment so cards don't print in a fallback font
+    document.fonts.ready.then(() => setTimeout(() => window.print(), 150));
+  }
+
+  document.querySelectorAll('[data-print]').forEach((b) => b.addEventListener('click', () => printDoc(b.dataset.print)));
+
+  // ============ Downloads ============
+  function downloadCsv(name, rows) {
+    const csv = rows.map((r) => r.map((v) => {
+      const s = String(v == null ? '' : v);
+      return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+    }).join(',')).join('\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+    a.download = name;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+
+  const stamp = () => new Date().toISOString().slice(0, 10);
+
+  $('csvBtn').addEventListener('click', () => {
+    const list = targets();
+    if (!list.length) return toast('No orders to download.');
+    const rows = [['Order #', 'Status', 'Received', 'Roast date', 'Name', 'Email', 'Phone', 'Delivery', 'Street', 'City', 'State', 'ZIP', 'Qty', 'Coffee', 'Size', 'Grind', 'Note', 'Line total', 'Order total']];
+    list.forEach((o) => o.items.forEach((i) => {
+      const { bean, size, grind } = parseSku(i.sku);
+      rows.push([o.orderNo, o.status, o.received.slice(0, 10), o.roastDate, o.name, o.email, o.phone, o.delivery, o.street, o.city, o.state, o.zip, i.qty, COFFEES[bean] || i.name, SIZES[size] ? SIZES[size].label : '', GRINDS[grind] || i.detail, i.note, i.qty * i.unitPrice, o.total]);
+    }));
+    downloadCsv(`ccr-orders-${stamp()}.csv`, rows);
+  });
+
+  // Pirate Ship's spreadsheet import: one row per shipment with an estimated weight
+  $('pirateBtn').addEventListener('click', () => {
+    const list = targets().filter((o) => o.delivery !== 'Pickup');
+    if (!list.length) return toast('No shipping orders in this list. Pickups are left out.');
+    const rows = [['Name', 'Address', 'City', 'State', 'Zipcode', 'Country', 'Email', 'Phone', 'Order ID', 'Pounds', 'Ounces']];
+    list.forEach((o) => {
+      const oz = o.items.reduce((n, i) => n + (SIZES[parseSku(i.sku).size] ? SIZES[parseSku(i.sku).size].shipOz : 16) * i.qty, 0) + 4;
+      rows.push([o.name, o.street || o.address, o.city, o.state, o.zip, 'US', o.email, o.phone, o.orderNo, Math.floor(oz / 16), oz % 16]);
+    });
+    downloadCsv(`ccr-pirateship-${stamp()}.csv`, rows);
+  });
+
+  // ============ Sample orders for demo mode ============
+  function demoOrders() {
+    const roast = (() => { const d = new Date(); d.setHours(0, 0, 0, 0); do d.setDate(d.getDate() + 1); while (![1, 4].includes(d.getDay())); return d.toISOString().slice(0, 10); })();
+    const ago = (h) => new Date(Date.now() - h * 3600e3).toISOString();
+    const item = (sku, name, qty, price, note = '') => ({ sku, name, detail: GRINDS[sku.split('-')[3]], qty, unitPrice: price, note });
+    return [
+      { orderNo: 'CCR-DEMO01', received: ago(3), status: 'New', name: 'Maya Chen', email: 'maya@example.com', phone: '', delivery: 'Ship', street: '18 Elm St', city: 'Phoenixville', state: 'PA', zip: '19460', address: '18 Elm St, Phoenixville, PA 19460', roastDate: roast, customerNotes: '', subtotal: 40, shipping: 6, total: 46,
+        items: [item('CCR-ETH-12-PO', 'Ethiopia, 12 oz', 2, 20, 'Happy birthday, Dad! This one is bright and fruity.')] },
+      { orderNo: 'CCR-DEMO02', received: ago(9), status: 'Paid', name: 'Jordan Ellis', email: 'jordan@example.com', phone: '610-555-0142', delivery: 'Pickup', street: '', city: '', state: '', zip: '', address: '', roastDate: roast, customerNotes: 'Can pick up after 5pm', subtotal: 42, shipping: 0, total: 42,
+        items: [item('CCR-PRK-32-WB', 'Perkiomen Blend, 2 lb', 1, 42)] },
+      { orderNo: 'CCR-DEMO03', received: ago(20), status: 'Paid', name: 'Priya Patel', email: 'priya@example.com', phone: '', delivery: 'Ship', street: '402 Walnut Ave, Apt 3', city: 'Norristown', state: 'PA', zip: '19401', address: '402 Walnut Ave, Apt 3, Norristown, PA 19401', roastDate: roast, customerNotes: '', subtotal: 54, shipping: 0, total: 54,
+        items: [item('CCR-GUA-12-FP', 'Guatemala, 12 oz', 1, 18, 'Thank you, truly. This one is on me.'), item('CCR-COL-12-DR', 'Colombia, 12 oz', 2, 18)] },
+      { orderNo: 'CCR-DEMO04', received: ago(30), status: 'Roasted', name: 'Sam Rivera', email: 'sam@example.com', phone: '', delivery: 'Ship', street: '77 Main St', city: 'Collegeville', state: 'PA', zip: '19426', address: '77 Main St, Collegeville, PA 19426', roastDate: roast, customerNotes: '', subtotal: 18, shipping: 6, total: 24,
+        items: [item('CCR-HON-12-CB', 'Honduras, 12 oz', 1, 18, 'Just because. Hope your mornings get a little better.')] },
+      { orderNo: 'CCR-DEMO05', received: ago(52), status: 'Packed', name: 'Alex Kim', email: 'alex@example.com', phone: '484-555-0199', delivery: 'Pickup', street: '', city: '', state: '', zip: '', address: '', roastDate: roast, customerNotes: '', subtotal: 95, shipping: 0, total: 95,
+        items: [item('CCR-COL-80-ES', 'Colombia, 5 lb', 1, 95)] },
+      { orderNo: 'CCR-DEMO06', received: ago(120), status: 'Done', name: 'Taylor Brooks', email: 'taylor@example.com', phone: '', delivery: 'Ship', street: '9 Ridge Pike', city: 'Lafayette Hill', state: 'PA', zip: '19444', address: '9 Ridge Pike, Lafayette Hill, PA 19444', roastDate: roast, customerNotes: '', subtotal: 36, shipping: 6, total: 42,
+        items: [item('CCR-GUA-12-WB', 'Guatemala, 12 oz', 2, 18)] },
+    ];
+  }
+
+  // ============ Start ============
+  const savedKey = store.get(STORE.key);
+  if (new URLSearchParams(location.search).has('demo')) {
+    $('demoBtn').click();
+  } else if (savedKey) {
+    unlock(savedKey, true);
+  }
+</script>
+</body>
+</html>
