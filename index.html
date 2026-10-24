@@ -11,18 +11,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --brown: #3b2117;
+    /* Espresso and teal: ivory page, espresso text, teal for actions,
+       copper only for small highlights. Dark is reserved for the footer. */
+    --brown: #2a1a12;
     --brown-soft: #5a3a2b;
-    --cream: #f0e2c8;
-    --paper: #f8f1e4;
+    --cream: #fbf7f1;
+    --paper: #fbf7f1;
+    --sand: #f3ebe0;
+    --teal-tint: #e6f0ee;
     --accent: #1f6f68;
     --accent-dark: #144a45;
-    --pine: #133f3b;
-    --rust: #c1793a;
+    --rust: #b8693a;
     --rust-dark: #9a5220;
-    --rust-light: #d9955a;
-    --line: rgba(59,33,23,0.15);
-    --shadow: 0 10px 30px rgba(59,33,23,0.12);
+    --rust-tint: #f3e3d3;
+    --line: rgba(42,26,18,0.12);
+    --shadow: 0 10px 30px rgba(42,26,18,0.08);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,9 +53,10 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background: var(--brown);
-    color: var(--cream);
-    border-bottom: 3px solid var(--accent);
+    background: rgba(251,247,241,0.94);
+    backdrop-filter: blur(8px);
+    color: var(--brown);
+    border-bottom: 1px solid var(--line);
   }
 
   .nav {
@@ -67,7 +71,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: var(--cream);
+    color: inherit;
     text-decoration: none;
     font-family: 'Domine', serif;
     font-weight: 700;
@@ -90,14 +94,14 @@
   .nav-links { display: none; gap: 24px; }
 
   .nav-links a {
-    color: var(--cream);
+    color: var(--brown);
     text-decoration: none;
     font-size: 14px;
     font-weight: 600;
-    opacity: 0.85;
+    opacity: 0.8;
   }
 
-  .nav-links a:hover { opacity: 1; color: #fff; }
+  .nav-links a:hover { opacity: 1; color: var(--accent); }
 
   @media (min-width: 820px) { .nav-links { display: flex; } }
 
@@ -116,8 +120,9 @@
     flex: none;
     padding: 6px 12px;
     border-radius: 999px;
-    border: 1px solid rgba(240,226,200,0.25);
-    color: var(--cream);
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--brown);
     text-decoration: none;
     font-size: 13px;
     font-weight: 600;
@@ -132,9 +137,9 @@
     gap: 8px;
     padding: 9px 16px;
     border-radius: 999px;
-    border: 2px solid var(--cream);
-    background: var(--cream);
-    color: var(--brown);
+    border: 2px solid var(--accent);
+    background: var(--accent);
+    color: var(--cream);
     font: 700 14px 'Work Sans', sans-serif;
     cursor: pointer;
     transition: transform 0.2s ease;
@@ -152,8 +157,8 @@
     height: 22px;
     padding: 0 6px;
     border-radius: 999px;
-    background: var(--accent);
-    color: var(--cream);
+    background: var(--cream);
+    color: var(--accent-dark);
     font-size: 12px;
     display: grid;
     place-items: center;
@@ -161,20 +166,24 @@
 
   /* ============ Hero ============ */
   .hero {
-    background: var(--brown);
-    color: var(--cream);
+    background: var(--sand);
+    color: var(--brown);
     padding: 48px 0 64px;
     position: relative;
     overflow: hidden;
   }
 
+  /* soft teal halo behind the bags */
   .hero::before {
     content: "";
     position: absolute;
-    inset: 0;
+    right: -10%;
+    top: 10%;
+    width: 60%;
+    aspect-ratio: 1;
+    border-radius: 50%;
     pointer-events: none;
-    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-    opacity: 0.12;
+    background: var(--teal-tint);
   }
 
   .hero-grid {
@@ -199,14 +208,14 @@
     border: 2px solid var(--accent);
   }
 
-  .pill.solid { background: var(--accent); transform: rotate(-3deg); }
-  .pill.outline { transform: rotate(2deg); }
-  .pill.rust { background: var(--rust); border-color: var(--rust); color: var(--brown); transform: rotate(-1deg); }
+  .pill.solid { background: var(--accent); color: var(--cream); transform: rotate(-3deg); }
+  .pill.outline { border-color: var(--brown); transform: rotate(2deg); }
+  .pill.rust { background: var(--rust-tint); border-color: var(--rust-tint); color: #7a4220; transform: rotate(-1deg); }
 
   .hero h1 { font-size: clamp(34px, 5.5vw, 58px); margin-bottom: 16px; }
-  .hero h1 em { font-style: normal; color: var(--rust); }
+  .hero h1 em { font-style: normal; color: var(--rust-dark); }
 
-  .hero p.lede { font-size: 17px; opacity: 0.8; max-width: 480px; margin-bottom: 28px; }
+  .hero p.lede { font-size: 17px; color: var(--brown-soft); max-width: 480px; margin-bottom: 28px; }
 
   .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
 
@@ -229,8 +238,8 @@
 
   .btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
   .btn:active { transform: scale(0.97); }
-  .btn.ghost { background: transparent; color: inherit; }
-  .btn.ghost:hover { background: rgba(31,111,104,0.15); }
+  .btn.ghost { background: transparent; color: inherit; border-color: currentColor; }
+  .btn.ghost:hover { background: rgba(31,111,104,0.1); border-color: var(--accent); }
   .btn.block { width: 100%; }
   .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 
@@ -292,7 +301,7 @@
     height: 300px;
   }
 
-  .hero-bags .mini-bag { --w: 150px; margin: 0 -14px; filter: drop-shadow(0 18px 24px rgba(0,0,0,0.35)); }
+  .hero-bags .mini-bag { --w: 150px; margin: 0 -14px; filter: drop-shadow(0 16px 20px rgba(42,26,18,0.18)); }
   .hero-bags .mini-bag:nth-child(1) { transform: rotate(-9deg) translateY(10px); }
   .hero-bags .mini-bag:nth-child(2) { --w: 175px; z-index: 2; }
   .hero-bags .mini-bag:nth-child(3) { transform: rotate(8deg) translateY(14px); }
@@ -446,8 +455,8 @@
     position: absolute;
     top: -9px;
     right: 10px;
-    background: var(--rust);
-    color: #2a160f;
+    background: var(--rust-tint);
+    color: #7a4220;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -542,8 +551,9 @@
   .preview {
     position: sticky;
     top: 84px;
-    background: var(--brown);
-    color: var(--cream);
+    background: #fff;
+    color: var(--brown);
+    border: 1px solid var(--line);
     border-radius: 22px;
     padding: 24px;
     box-shadow: var(--shadow);
@@ -649,11 +659,12 @@
     justify-content: space-between;
     gap: 10px;
     padding: 6px 0;
-    border-bottom: 1px solid rgba(240,226,200,0.12);
+    border-bottom: 1px solid var(--line);
   }
 
   .summary-lines div[hidden] { display: none; }
-  .summary-lines div span:first-child { opacity: 0.65; }
+  .summary-lines div span:first-child { color: var(--brown-soft); }
+  .summary-lines div span:last-child { font-weight: 600; }
 
   .summary-total {
     display: flex;
@@ -693,20 +704,17 @@
   .quiz-result { font-size: 14px; color: var(--accent-dark); font-weight: 600; min-height: 20px; }
 
   /* ============ Product cards (grinders, bundles) ============ */
-  .alt { background: var(--cream); }
-  .dark { background: var(--brown); color: var(--cream); }
-  .dark .eyebrow { color: var(--rust); }
+  .alt { background: var(--sand); }
 
-  /* holiday gets its own deep pine so it doesn't read as another brown band */
-  .festive { background: var(--pine); color: var(--cream); position: relative; overflow: hidden; }
-  .festive .eyebrow { color: var(--rust-light); }
+  /* holiday gets a soft teal band with a faint dot pattern so it reads as seasonal */
+  .festive { background: var(--teal-tint); position: relative; overflow: hidden; }
   .festive::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.07;
-    background-image: radial-gradient(circle, var(--cream) 1.5px, transparent 1.6px);
+    opacity: 0.18;
+    background-image: radial-gradient(circle, var(--accent) 1.5px, transparent 1.6px);
     background-size: 28px 28px;
   }
   .festive .wrap { position: relative; }
@@ -793,7 +801,7 @@
     position: absolute;
     top: 16px;
     right: -6px;
-    background: #8a3b2e;
+    background: var(--rust);
     color: var(--cream);
     font-size: 11px;
     font-weight: 700;
@@ -938,8 +946,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 18px 20px;
-    background: var(--brown);
-    color: var(--cream);
+    background: #fff;
+    color: var(--brown);
+    border-bottom: 1px solid var(--line);
   }
 
   .drawer-head h2 { font-size: 22px; }
@@ -949,8 +958,8 @@
     height: 36px;
     border-radius: 50%;
     border: none;
-    background: rgba(240,226,200,0.12);
-    color: var(--cream);
+    background: var(--sand);
+    color: var(--brown);
     font-size: 20px;
     cursor: pointer;
   }
@@ -1684,10 +1693,10 @@
           <button class="btn block" data-add-grinder="${g.sku}">Add to cart</button>
         </div>
       </div>`).join('') + `
-      <div class="card" style="background:var(--brown);color:var(--cream)">
+      <div class="card" style="background:var(--teal-tint);border-color:transparent">
         <h3>Not sure you need one?</h3>
-        <p style="opacity:.8">If you finish a bag in two weeks or less, pre-ground is fine. Buying the 2 lb or 5 lb bag? Go whole bean and grind as you go.</p>
-        <div class="card-foot"><a class="btn ghost block" href="#build" style="border-color:var(--cream)">Build a bag</a></div>
+        <p>If you finish a bag in two weeks or less, pre-ground is fine. Buying the 2 lb or 5 lb bag? Go whole bean and grind as you go.</p>
+        <div class="card-foot"><a class="btn ghost block" href="#build">Build a bag</a></div>
       </div>`;
 
     document.querySelectorAll('[data-add-grinder]').forEach((btn) => {
