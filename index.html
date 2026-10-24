@@ -838,13 +838,8 @@
   @media (min-width: 760px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 1000px) { .foot-grid { grid-template-columns: 1.3fr 0.8fr 1fr 1.4fr; gap: 40px; } }
 
-  .foot-logo {
-    width: 148px;
-    height: 148px;
-    border-radius: 50%;
-    box-shadow: 0 0 0 6px rgba(251,247,241,0.08);
-    margin-bottom: 22px;
-  }
+  .foot-name { font-family: var(--serif); font-size: 34px; line-height: 1.05; margin-bottom: 18px; }
+  .foot-name em { display: block; font-style: italic; color: #d9a77c; }
 
   .foot-brand p { color: rgba(251,247,241,0.7); max-width: 260px; }
 
@@ -1276,7 +1271,7 @@
 <footer>
   <div class="wrap foot-grid">
     <div class="foot-brand">
-      <img class="foot-logo" src="logo.png" alt="Collegeville Coffee Roasters, Est. 2026">
+      <p class="foot-name">Collegeville <em>Coffee Roasters</em></p>
       <p>Small batch, roasted in Collegeville, PA. Est. 2026.</p>
     </div>
     <nav class="foot-col" aria-label="Shop">
