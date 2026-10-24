@@ -587,7 +587,7 @@
   .card .art.crowd .mini-bag { --w: 36px; }
   .card .art.crowd svg { width: 44px; height: 58px; }
 
-  .card h3 { font-size: 28px; margin-bottom: 8px; }
+  .card h3 { font-size: 28px; font-style: italic; margin-bottom: 8px; }
   .card p { font-size: 14px; color: var(--brown-soft); margin-bottom: 14px; }
   .card ul { list-style: none; font-size: 14px; margin-bottom: 18px; border-top: 1px solid var(--line); }
   .card li { padding: 8px 0; border-bottom: 1px solid var(--line); }
@@ -628,44 +628,108 @@
   .holiday-note { margin-top: 32px; font-size: 14px; }
 
   /* ============ Bean info ============ */
-  .bean-tabs { display: flex; gap: 28px; flex-wrap: wrap; margin-bottom: 32px; border-bottom: 1px solid var(--line); }
+  .bean-layout { display: grid; gap: 40px; align-items: start; }
 
-  .bean-tabs button {
-    padding: 0 0 12px;
-    margin-bottom: -1px;
-    border: none;
-    border-bottom: 1px solid transparent;
-    background: none;
-    font: 400 15px var(--sans);
-    color: var(--brown-soft);
-    cursor: pointer;
+  @media (min-width: 860px) {
+    .bean-layout { grid-template-columns: 1fr 1fr; gap: 72px; }
+    .bean-tabs { position: sticky; top: 110px; }
   }
 
-  .bean-tabs button:hover { color: var(--brown); }
-  .bean-tabs button[aria-selected="true"] { color: var(--brown); border-bottom-color: var(--brown); }
+  .bean-tabs { display: flex; flex-direction: column; align-items: flex-start; }
 
-  .bean-detail { display: grid; gap: 48px; }
+  .bean-tabs button {
+    padding: 2px 0;
+    border: none;
+    background: none;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(38px, 5.4vw, 68px);
+    line-height: 1.08;
+    color: var(--brown);
+    opacity: 0.22;
+    cursor: pointer;
+    text-align: left;
+    transition: opacity 0.2s ease;
+  }
 
-  @media (min-width: 820px) { .bean-detail { grid-template-columns: 1.3fr 1fr; } }
+  .bean-tabs button:hover { opacity: 0.5; }
+  .bean-tabs button[aria-selected="true"] { opacity: 1; }
+  .bean-tabs button[aria-selected="true"]::before { content: "("; }
+  .bean-tabs button[aria-selected="true"]::after { content: ")"; }
 
-  .bean-detail h3 { font-size: 48px; margin-bottom: 6px; }
-  .bean-detail .region { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--accent); margin-bottom: 18px; }
-  .bean-detail .story { color: var(--brown-soft); font-size: 16px; margin-bottom: 24px; max-width: 520px; }
+  .bean-detail { padding-top: 12px; }
 
-  .notes-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
-  .note-chip { padding: 6px 12px; border: 1px solid var(--line-strong); border-radius: 2px; font-size: 13px; }
+  .bd-art {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 220px;
+    padding-bottom: 28px;
+    margin-bottom: 28px;
+    background: var(--sand);
+    border-bottom: 3px solid var(--c);
+  }
 
-  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
-  .fact { padding: 14px 0; border-top: 1px solid var(--line); }
-  .fact span { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--brown-soft); margin-bottom: 4px; }
-  .fact strong { font-size: 15px; font-weight: 500; }
+  .bd-art .mini-bag { --w: 100px; }
 
-  .meter { margin-bottom: 22px; }
-  .meter-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
-  .meter-label span:first-child { text-transform: uppercase; letter-spacing: 0.16em; font-size: 10px; color: var(--brown-soft); }
-  .meter-track { height: 2px; background: var(--line); }
-  .meter-fill { height: 100%; background: var(--accent); transition: width 0.4s ease; }
-  .meter.roast .meter-fill { background: var(--brown); }
+  .bean-detail .region { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--rust-dark); margin-bottom: 10px; }
+  .bean-detail .tastes { font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.25; margin-bottom: 14px; }
+  .bean-detail .story { color: var(--brown-soft); margin-bottom: 24px; }
+
+  .spec { margin-bottom: 28px; border-top: 1px solid var(--line); }
+  .spec div { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .spec dt { color: var(--brown-soft); }
+  .spec dd { font-weight: 500; text-align: right; }
+
+  /* ============ Statement ============ */
+  .statement { text-align: center; border-bottom: 1px solid var(--line); }
+  .statement .eyebrow { justify-content: center; }
+  .statement .eyebrow::after { content: ""; width: 28px; height: 1px; background: currentColor; }
+
+  .statement-text {
+    max-width: 880px;
+    margin: 0 auto 48px;
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.6vw, 44px);
+    line-height: 1.25;
+  }
+
+  .statement-text em { font-style: italic; color: var(--accent); }
+
+  .statement-facts {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 880px;
+    margin: 0 auto;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (min-width: 760px) { .statement-facts { grid-template-columns: repeat(4, 1fr); } }
+
+  .statement-facts li { padding: 20px 8px 0; font-size: 14px; }
+  .statement-facts span { display: block; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--brown-soft); margin-bottom: 6px; }
+
+  /* ============ Gift steps ============ */
+  .section-head h2 em { font-style: italic; }
+  .festive .section-head h2 em { color: #d9a77c; }
+
+  .gift-steps {
+    list-style: none;
+    display: grid;
+    gap: 0 32px;
+    margin: -16px 0 48px;
+    border-top: 1px solid rgba(251,247,241,0.2);
+  }
+
+  @media (min-width: 760px) { .gift-steps { grid-template-columns: repeat(3, 1fr); } }
+
+  .gift-steps li { display: flex; gap: 14px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid rgba(251,247,241,0.2); font-size: 14px; color: rgba(251,247,241,0.85); }
+  .gift-steps span { font-family: var(--serif); font-style: italic; font-size: 18px; color: #d9a77c; }
+
+  .assure { margin-top: 12px; font-size: 12px; color: var(--brown-soft); text-align: center; }
+  .assure::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: 1px; }
 
   /* ============ Grind guide ============ */
   .guide-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
@@ -918,6 +982,20 @@
     </div>
   </section>
 
+  <!-- ============ Statement ============ -->
+  <section class="statement">
+    <div class="wrap">
+      <p class="eyebrow">Collegeville, Pennsylvania</p>
+      <p class="statement-text">A small roastery on the Perkiomen. We roast to order, twice a week, and send every bag out <em>within days</em>, so it reaches your cup at its best.</p>
+      <ul class="statement-facts">
+        <li><span>Roasted</span>Monday and Thursday</li>
+        <li><span>Shipped</span>Within 3 days of roasting</li>
+        <li><span>Pickup</span>Free in Collegeville</li>
+        <li><span>Shipping</span>Free over $50, $6 under</li>
+      </ul>
+    </div>
+  </section>
+
   <!-- ============ Build a bag ============ -->
   <section id="build">
     <div class="wrap">
@@ -1002,6 +1080,7 @@
           </div>
 
           <button class="btn block" id="addBag">Add to cart</button>
+          <p class="assure">Roasted to order. Ships within 3 days of roasting.</p>
         </aside>
       </div>
     </div>
@@ -1011,10 +1090,15 @@
   <section id="holiday" class="festive">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Holiday 2026</p>
-        <h2>Gift bundles</h2>
+        <p class="eyebrow">'Tis the season</p>
+        <h2>Give the gift of a <em>better morning</em></h2>
         <p>Wrapped, ready to give, with a handwritten note if you want one. Order by Dec 15 for delivery before Christmas.</p>
       </div>
+      <ol class="gift-steps">
+        <li><span>01</span>Choose a bundle and a grind</li>
+        <li><span>02</span>Add a handwritten note, free</li>
+        <li><span>03</span>We ship it to them, or you pick it up</li>
+      </ol>
       <div class="cards" id="bundleCards"></div>
       <p class="holiday-note">Picking up in Collegeville? Choose local pickup at checkout and skip shipping.</p>
     </div>
@@ -1028,8 +1112,10 @@
         <h2>Where your coffee comes from</h2>
         <p>Every bean we roast comes from a named region, and we roast it to bring out what that place does best.</p>
       </div>
-      <div class="bean-tabs" id="beanTabs" role="tablist" aria-label="Beans"></div>
-      <div class="bean-detail" id="beanDetail" role="tabpanel"></div>
+      <div class="bean-layout">
+        <div class="bean-tabs" id="beanTabs" role="tablist" aria-label="Beans"></div>
+        <div class="bean-detail" id="beanDetail" role="tabpanel"></div>
+      </div>
     </div>
   </section>
 
@@ -1057,20 +1143,6 @@
     </div>
   </section>
 
-  <!-- ============ Visit ============ -->
-  <section class="alt">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Shipping &amp; pickup</p>
-        <h2>How it gets to you</h2>
-      </div>
-      <div class="visit-grid">
-        <div class="fact"><strong>Roasted to order</strong><p>We roast Monday and Thursday. Your bag ships within 3 days of roasting, with the roast date on the label.</p></div>
-        <div class="fact"><strong>Free shipping over $50</strong><p>Flat $6 under that, anywhere in the US.</p></div>
-        <div class="fact"><strong>Local pickup</strong><p>Free pickup in Collegeville, PA. We'll email you when your order is ready.</p></div>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer>
@@ -1280,7 +1352,7 @@
   function renderBuilderChoices() {
     $('beanChoices').innerHTML = BEANS.map((b) => choiceHTML('bean', b.id,
       `<span class="name"><span class="bean-swatch" style="background:${b.color}"></span>${b.name}</span>
-       <span class="sub">${b.notes.slice(0, 2).join(' · ')}</span>
+       <span class="sub">${b.notes.slice(0, 2).join(' / ')}</span>
        <span class="sub">${b.roast} roast</span>`,
       b.id === pick.bean, b.tag)).join('');
 
@@ -1309,7 +1381,7 @@
     const grind = grindById(pick.grind);
 
     $('bagName').textContent = bean.name;
-    $('bagNotes').textContent = bean.notes.slice(0, 2).join(' · ');
+    $('bagNotes').textContent = bean.notes.slice(0, 2).join(' / ');
     $('bagGrind').textContent = grind.label;
     $('bagSize').textContent = size.label;
     $('bagLabel').style.borderTopColor = bean.color;
@@ -1453,7 +1525,7 @@
         <ul>${g.points.map((p) => `<li>${p}</li>`).join('')}</ul>
         <div class="card-foot">
           <div class="price-row"><strong>${money(g.price)}</strong></div>
-          <button class="btn block" data-add-grinder="${g.sku}">Add to cart</button>
+          <button class="btn ghost block" data-add-grinder="${g.sku}">Add to cart</button>
         </div>
       </div>`).join('') + `
       <div class="card" style="background:transparent;border-color:var(--line-strong)">
@@ -1485,7 +1557,7 @@
             <textarea id="giftText${i}" rows="2" maxlength="200" placeholder="Merry Christmas! Love, ..." aria-label="Gift note"></textarea>
           </div>
           <div class="price-row"><span><strong>${money(b.price)}</strong><span class="was">${money(b.was)}</span></span></div>
-          <button class="btn block" data-add-bundle="${i}">Add gift to cart</button>
+          <button class="btn ghost block" data-add-bundle="${i}">Add gift to cart</button>
         </div>
       </div>`).join('');
 
@@ -1513,30 +1585,28 @@
   }
 
   // ============ Bean info ============
+  // big italic list of coffees (the chosen one is solid, the rest fade back)
+  // next to a detail panel with the facts in hairline rows
   function renderBeanInfo(id) {
     $('beanTabs').innerHTML = BEANS.map((b) =>
       `<button role="tab" aria-selected="${b.id === id}" data-bean-tab="${b.id}">${b.name}</button>`).join('');
 
     const b = beanById(id);
+    const level = (n, words) => (n < 45 ? words[0] : n < 70 ? words[1] : words[2]);
     $('beanDetail').innerHTML = `
-      <div>
-        <h3><span class="bean-swatch" style="background:${b.color};width:18px;height:18px"></span>${b.name}</h3>
-        <p class="region">${b.farm}</p>
-        <p class="story">${b.story}</p>
-        <div class="notes-row">${b.notes.map((n) => `<span class="note-chip">${n}</span>`).join('')}</div>
-        <div class="facts">
-          <div class="fact"><span>Process</span><strong>${b.process}</strong></div>
-          <div class="fact"><span>Altitude</span><strong>${b.altitude}</strong></div>
-          <div class="fact"><span>Roast</span><strong>${b.roast}</strong></div>
-          <div class="fact"><span>Best for</span><strong>${b.bestFor}</strong></div>
-        </div>
-      </div>
-      <div>
-        <div class="meter roast"><div class="meter-label"><span>Roast</span><span>${b.roast}</span></div><div class="meter-track"><div class="meter-fill" style="width:${b.roastLevel}%"></div></div></div>
-        <div class="meter"><div class="meter-label"><span>Body</span><span>${b.body < 45 ? 'Light' : b.body < 70 ? 'Medium' : 'Full'}</span></div><div class="meter-track"><div class="meter-fill" style="width:${b.body}%"></div></div></div>
-        <div class="meter"><div class="meter-label"><span>Brightness</span><span>${b.acidity < 45 ? 'Low' : b.acidity < 70 ? 'Medium' : 'High'}</span></div><div class="meter-track"><div class="meter-fill" style="width:${b.acidity}%;background:var(--rust)"></div></div></div>
-        <button class="btn block" data-order-bean="${b.id}" style="margin-top:12px">Order ${b.name}</button>
-      </div>`;
+      <div class="bd-art" style="--c:${b.color}">${miniBagHTML(b.id)}</div>
+      <p class="region">${b.farm}</p>
+      <p class="tastes">${b.notes.join(' / ')}</p>
+      <p class="story">${b.story}</p>
+      <dl class="spec">
+        <div><dt>Process</dt><dd>${b.process}</dd></div>
+        <div><dt>Altitude</dt><dd>${b.altitude}</dd></div>
+        <div><dt>Roast</dt><dd>${b.roast}</dd></div>
+        <div><dt>Body</dt><dd>${level(b.body, ['Light', 'Medium', 'Full'])}</dd></div>
+        <div><dt>Brightness</dt><dd>${level(b.acidity, ['Low', 'Medium', 'High'])}</dd></div>
+        <div><dt>Best for</dt><dd>${b.bestFor}</dd></div>
+      </dl>
+      <button class="btn" data-order-bean="${b.id}">Order ${b.name} — from ${money(SIZES[0].price + b.upcharge)}</button>`;
 
     document.querySelectorAll('[data-bean-tab]').forEach((t) =>
       t.addEventListener('click', () => renderBeanInfo(t.dataset.beanTab)));
