@@ -1,0 +1,2007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Collegeville Coffee Roasters: small-batch, ultra-fresh coffee roasted in Collegeville, PA. Order whole bean or ground, add a grinder, or send a holiday gift bundle.">
+<title>Collegeville Coffee Roasters</title>
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Domine:wght@400;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brown: #3b2117;
+    --brown-soft: #5a3a2b;
+    --cream: #f0e2c8;
+    --paper: #f8f1e4;
+    --accent: #1f6f68;
+    --accent-dark: #144a45;
+    --pine: #133f3b;
+    --rust: #c1793a;
+    --rust-dark: #9a5220;
+    --rust-light: #d9955a;
+    --line: rgba(59,33,23,0.15);
+    --shadow: 0 10px 30px rgba(59,33,23,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Work Sans', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--paper);
+    color: var(--brown);
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 { font-family: 'Domine', Georgia, serif; line-height: 1.15; }
+
+  img { max-width: 100%; display: block; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+  @media (min-width: 700px) { .wrap { padding: 0 32px; } }
+
+  /* ============ Header ============ */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--brown);
+    color: var(--cream);
+    border-bottom: 3px solid var(--accent);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    height: 64px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--cream);
+    text-decoration: none;
+    font-family: 'Domine', serif;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: 0.5px;
+  }
+
+  .brand img { width: 40px; height: 40px; border-radius: 50%; background: var(--paper); }
+
+  .brand span small {
+    display: block;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .nav-links { display: none; gap: 24px; }
+
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0.85;
+  }
+
+  .nav-links a:hover { opacity: 1; color: #fff; }
+
+  @media (min-width: 820px) { .nav-links { display: flex; } }
+
+  /* phones: the section links move to a scrollable row under the header */
+  .subnav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 0 16px 10px;
+    scrollbar-width: none;
+  }
+
+  .subnav::-webkit-scrollbar { display: none; }
+
+  .subnav a {
+    flex: none;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(240,226,200,0.25);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  @media (min-width: 820px) { .subnav { display: none; } }
+
+  .cart-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 2px solid var(--cream);
+    background: var(--cream);
+    color: var(--brown);
+    font: 700 14px 'Work Sans', sans-serif;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .cart-btn.bump { animation: bump 0.45s ease; }
+
+  @keyframes bump {
+    30% { transform: scale(1.18) rotate(-4deg); }
+    60% { transform: scale(0.95) rotate(2deg); }
+  }
+
+  .cart-count {
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--cream);
+    font-size: 12px;
+    display: grid;
+    place-items: center;
+  }
+
+  /* ============ Hero ============ */
+  .hero {
+    background: var(--brown);
+    color: var(--cream);
+    padding: 48px 0 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.12;
+  }
+
+  .hero-grid {
+    position: relative;
+    display: grid;
+    gap: 32px;
+    align-items: center;
+  }
+
+  @media (min-width: 860px) { .hero-grid { grid-template-columns: 1.2fr 1fr; } }
+
+  .pill-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+
+  .pill {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 2px solid var(--accent);
+  }
+
+  .pill.solid { background: var(--accent); transform: rotate(-3deg); }
+  .pill.outline { transform: rotate(2deg); }
+  .pill.rust { background: var(--rust); border-color: var(--rust); color: var(--brown); transform: rotate(-1deg); }
+
+  .hero h1 { font-size: clamp(34px, 5.5vw, 58px); margin-bottom: 16px; }
+  .hero h1 em { font-style: normal; color: var(--rust); }
+
+  .hero p.lede { font-size: 17px; opacity: 0.8; max-width: 480px; margin-bottom: 28px; }
+
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    border: 2px solid var(--accent);
+    background: var(--accent);
+    color: var(--cream);
+    font: 700 15px 'Work Sans', sans-serif;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+  .btn:active { transform: scale(0.97); }
+  .btn.ghost { background: transparent; color: inherit; }
+  .btn.ghost:hover { background: rgba(31,111,104,0.15); }
+  .btn.block { width: 100%; }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  /* ============ Mini bag (hero, bundles) ============ */
+  .mini-bag {
+    --w: 64px;
+    position: relative;
+    width: var(--w);
+    height: calc(var(--w) * 1.3);
+    flex: none;
+  }
+
+  .mini-bag::before {
+    content: "";
+    position: absolute;
+    inset: 12% 0 0 0;
+    background: #c9a77c;
+    border-radius: 6px 6px 10px 10px;
+    box-shadow: inset calc(var(--w) * -0.08) 0 0 rgba(0,0,0,0.08);
+  }
+
+  .mini-bag::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 5%;
+    right: 5%;
+    height: 16%;
+    background: #b8946a;
+    clip-path: polygon(0 100%, 4% 0, 96% 0, 100% 100%);
+  }
+
+  .mini-bag .mb-label {
+    position: absolute;
+    z-index: 1;
+    left: 12%;
+    right: 12%;
+    top: 34%;
+    bottom: 12%;
+    background: var(--paper);
+    border-top: calc(var(--w) * 0.07) solid var(--c, var(--rust));
+    border-radius: 4px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-family: 'Domine', serif;
+    font-weight: 700;
+    font-size: calc(var(--w) * 0.1);
+    line-height: 1.1;
+    color: var(--brown);
+    padding: 2px;
+  }
+
+  .hero-bags {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 300px;
+  }
+
+  .hero-bags .mini-bag { --w: 150px; margin: 0 -14px; filter: drop-shadow(0 18px 24px rgba(0,0,0,0.35)); }
+  .hero-bags .mini-bag:nth-child(1) { transform: rotate(-9deg) translateY(10px); }
+  .hero-bags .mini-bag:nth-child(2) { --w: 175px; z-index: 2; }
+  .hero-bags .mini-bag:nth-child(3) { transform: rotate(8deg) translateY(14px); }
+
+  .hero-badge {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    right: 6%;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    transform: rotate(10deg);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  }
+
+  @media (max-width: 520px) {
+    .hero-bags { height: 220px; }
+    .hero-bags .mini-bag { --w: 100px; }
+    .hero-bags .mini-bag:nth-child(2) { --w: 120px; }
+    .hero-badge { width: 70px; height: 70px; right: 2%; }
+  }
+
+  .origins-strip {
+    margin-top: 28px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    opacity: 0.55;
+  }
+
+  /* ============ Sections ============ */
+  section { padding: 64px 0; }
+
+  .section-head { margin-bottom: 32px; max-width: 640px; }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rust-dark);
+    margin-bottom: 8px;
+  }
+
+  .section-head h2 { font-size: clamp(28px, 4vw, 40px); margin-bottom: 10px; }
+  .section-head p { opacity: 0.75; }
+
+  /* ============ Builder ============ */
+  .builder {
+    display: grid;
+    gap: 28px;
+    align-items: start;
+  }
+
+  @media (min-width: 920px) { .builder { grid-template-columns: 1fr 340px; } }
+
+  .step {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 22px;
+    margin-bottom: 18px;
+  }
+
+  .step-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-family: 'Domine', serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .step-num {
+    width: 32px;
+    height: 32px;
+    flex: none;
+    border-radius: 50%;
+    background: var(--brown);
+    color: var(--cream);
+    display: grid;
+    place-items: center;
+    font: 700 14px 'Work Sans', sans-serif;
+  }
+
+  .step-title .hint {
+    margin-left: auto;
+    padding: 7px 12px;
+    border-radius: 999px;
+    border: 2px solid var(--rust);
+    background: #fff;
+    font: 700 13px 'Work Sans', sans-serif;
+    color: var(--rust-dark);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .step-title .hint:hover, .step-title .hint[aria-expanded="true"] { background: var(--rust); color: #2a160f; }
+
+  .choices { display: grid; gap: 10px; }
+  .choices.beans { grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); }
+  .choices.sizes { grid-template-columns: repeat(3, 1fr); }
+  .choices.grinds { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+
+  .choice { position: relative; }
+
+  .choice input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .choice label {
+    display: block;
+    height: 100%;
+    padding: 14px;
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    cursor: pointer;
+    background: var(--paper);
+    transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+  }
+
+  .choice label:hover { border-color: var(--rust); transform: translateY(-2px); }
+
+  .choice input:checked + label {
+    border-color: var(--accent);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(31,111,104,0.18);
+  }
+
+  .choice input:focus-visible + label { outline: 3px solid var(--rust); outline-offset: 2px; }
+
+  .bean-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 6px;
+    vertical-align: -1px;
+  }
+
+  .choice .name { font-weight: 700; font-size: 15px; display: block; }
+  .choice .sub { font-size: 13px; opacity: 0.7; display: block; margin-top: 2px; }
+  .choice .price { font-weight: 700; font-size: 15px; color: var(--brown); display: block; margin-top: 6px; }
+
+  .tag {
+    position: absolute;
+    top: -9px;
+    right: 10px;
+    background: var(--rust);
+    color: #2a160f;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 520px) {
+    .tag { right: 6px; font-size: 9px; letter-spacing: 0.5px; padding: 3px 6px; }
+    .step { padding: 18px 14px; }
+  }
+
+  .size-cups { font-size: 12px; opacity: 0.65; display: block; margin-top: 2px; }
+
+  /* grind size visual: dots get smaller as the grind gets finer */
+  .grind-dots {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    height: 22px;
+    margin-bottom: 8px;
+  }
+
+  .grind-dots i {
+    display: block;
+    border-radius: 50%;
+    background: var(--brown-soft);
+  }
+
+  .grind-dots.whole i {
+    width: 14px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--brown-soft);
+    position: relative;
+  }
+
+  .grind-dots.whole i::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 3px;
+    bottom: 3px;
+    width: 1.5px;
+    background: var(--paper);
+    transform: translateX(-50%) rotate(12deg);
+    border-radius: 2px;
+  }
+
+  .addon-box {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 14px;
+    background: rgba(31,111,104,0.08);
+    border: 2px dashed rgba(31,111,104,0.4);
+  }
+
+  .addon-box[hidden] { display: none; }
+
+  .addon-box input { width: 20px; height: 20px; accent-color: var(--accent); flex: none; }
+  .addon-box label { cursor: pointer; font-size: 14px; }
+  .addon-box strong { display: block; font-size: 15px; }
+
+  .qty {
+    display: inline-flex;
+    align-items: center;
+    border: 2px solid var(--line);
+    border-radius: 999px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .qty button {
+    width: 38px;
+    height: 38px;
+    border: none;
+    background: none;
+    font: 700 18px 'Work Sans', sans-serif;
+    color: var(--brown);
+    cursor: pointer;
+  }
+
+  .qty button:hover { background: var(--paper); }
+  .qty span { min-width: 28px; text-align: center; font-weight: 700; color: var(--brown); }
+
+  /* ============ Bag preview ============ */
+  .preview {
+    position: sticky;
+    top: 84px;
+    background: var(--brown);
+    color: var(--cream);
+    border-radius: 22px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .bag {
+    position: relative;
+    width: 170px;
+    height: 220px;
+    margin: 6px auto 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .bag.wiggle { animation: wiggle 0.5s ease; }
+
+  @keyframes wiggle {
+    25% { transform: rotate(-5deg); }
+    50% { transform: rotate(4deg); }
+    75% { transform: rotate(-2deg); }
+  }
+
+  .bag-body {
+    position: absolute;
+    inset: 22px 0 0 0;
+    background: #c9a77c;
+    border-radius: 10px 10px 16px 16px;
+    box-shadow: inset -14px 0 0 rgba(0,0,0,0.08), inset 0 -10px 0 rgba(0,0,0,0.06);
+  }
+
+  .bag-top {
+    position: absolute;
+    top: 0;
+    left: 8px;
+    right: 8px;
+    height: 30px;
+    background: #b8946a;
+    border-radius: 6px 6px 0 0;
+    clip-path: polygon(0 100%, 4% 0, 96% 0, 100% 100%);
+  }
+
+  .bag-top::after {
+    content: "";
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 12px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(59,33,23,0.35);
+  }
+
+  .bag-label {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: 58px;
+    bottom: 22px;
+    background: var(--paper);
+    color: var(--brown);
+    border-radius: 8px;
+    border-top: 10px solid var(--rust);
+    padding: 10px 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: border-color 0.3s ease;
+  }
+
+  .bag-label .l-brand { font-size: 8px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.6; }
+  .bag-label .l-name { font-family: 'Domine', serif; font-weight: 700; font-size: 16px; margin: 4px 0; line-height: 1.1; }
+  .bag-label .l-notes { font-size: 10px; opacity: 0.75; line-height: 1.3; }
+  .bag-label .l-grind {
+    margin-top: 8px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--brown);
+    color: var(--cream);
+    border-radius: 999px;
+    padding: 3px 6px;
+    align-self: center;
+  }
+
+  .bag-size {
+    position: absolute;
+    bottom: -8px;
+    right: -10px;
+    background: var(--accent);
+    color: var(--cream);
+    font-weight: 700;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    transform: rotate(6deg);
+  }
+
+  .summary-lines { font-size: 14px; margin-bottom: 16px; }
+
+  .summary-lines div {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(240,226,200,0.12);
+  }
+
+  .summary-lines div[hidden] { display: none; }
+  .summary-lines div span:first-child { opacity: 0.65; }
+
+  .summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+  }
+
+  .summary-total strong { font-family: 'Domine', serif; font-size: 28px; }
+
+  .sku { font: 600 11px ui-monospace, Menlo, monospace; opacity: 0.55; letter-spacing: 0.5px; }
+
+  /* ============ Quiz ============ */
+  .quiz {
+    background: var(--paper);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 2px solid var(--rust);
+  }
+
+  .quiz[hidden] { display: none; }
+  .quiz p { font-weight: 700; margin-bottom: 10px; }
+  .quiz-opts { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+
+  .quiz-opts button {
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 2px solid var(--line);
+    background: #fff;
+    font: 600 14px 'Work Sans', sans-serif;
+    color: var(--brown);
+    cursor: pointer;
+  }
+
+  .quiz-opts button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent); color: var(--cream); }
+  .quiz-result { font-size: 14px; color: var(--accent-dark); font-weight: 600; min-height: 20px; }
+
+  /* ============ Product cards (grinders, bundles) ============ */
+  .alt { background: var(--cream); }
+  .dark { background: var(--brown); color: var(--cream); }
+  .dark .eyebrow { color: var(--rust); }
+
+  /* holiday gets its own deep pine so it doesn't read as another brown band */
+  .festive { background: var(--pine); color: var(--cream); position: relative; overflow: hidden; }
+  .festive .eyebrow { color: var(--rust-light); }
+  .festive::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+    background-image: radial-gradient(circle, var(--cream) 1.5px, transparent 1.6px);
+    background-size: 28px 28px;
+  }
+  .festive .wrap { position: relative; }
+
+  .cards {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .card {
+    background: #fff;
+    color: var(--brown);
+    border-radius: 20px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line);
+    position: relative;
+  }
+
+  .card .art {
+    height: 120px;
+    margin: -22px -22px 16px;
+    border-radius: 20px 20px 0 0;
+    background: var(--paper);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    padding-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .card .art .mini-bag { --w: 58px; }
+  .card .art .mini-bag:nth-child(odd) { transform: rotate(-4deg); }
+  .card .art .mini-bag:nth-child(even) { transform: rotate(3deg); }
+  .card .art svg { width: 70px; height: 90px; flex: none; }
+  .card .art .mb-label { font-size: 0; }
+  .card .art.crowd .mini-bag { --w: 36px; margin: 0 -2px; }
+  .card .art.crowd svg { width: 46px; height: 60px; }
+
+  #bundleCards { grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); }
+
+  .card .included { font-size: 13px; font-weight: 600; opacity: 0.7; margin: 0; }
+
+  .card h3 { font-size: 20px; margin-bottom: 6px; }
+  .card p { font-size: 14px; opacity: 0.75; margin-bottom: 12px; }
+  .card ul { list-style: none; font-size: 14px; margin-bottom: 14px; }
+  .card li { padding: 3px 0 3px 20px; position: relative; }
+  .card li::before { content: "☕"; position: absolute; left: 0; font-size: 11px; top: 5px; }
+
+  .card .card-foot {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card .price-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .card .price-row strong { font-family: 'Domine', serif; font-size: 24px; }
+  .card .was { text-decoration: line-through; opacity: 0.5; font-size: 14px; margin-left: 6px; }
+
+  .card select, .field input, .field select, .field textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 2px solid var(--line);
+    background: var(--paper);
+    font: 500 14px 'Work Sans', sans-serif;
+    color: var(--brown);
+  }
+
+  .card select:focus, .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .gift-toggle { font-size: 13px; display: flex; gap: 8px; align-items: center; cursor: pointer; }
+  .gift-toggle input { accent-color: var(--accent); width: 16px; height: 16px; }
+  .gift-note[hidden] { display: none; }
+
+  .ribbon {
+    position: absolute;
+    top: 16px;
+    right: -6px;
+    background: #8a3b2e;
+    color: var(--cream);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .holiday-note {
+    margin-top: 24px;
+    font-size: 14px;
+    opacity: 0.75;
+  }
+
+  /* ============ Bean info ============ */
+  .bean-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+
+  .bean-tabs button {
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 2px solid var(--line);
+    background: #fff;
+    font: 600 14px 'Work Sans', sans-serif;
+    color: var(--brown);
+    cursor: pointer;
+  }
+
+  .bean-tabs button[aria-selected="true"] { background: var(--brown); color: var(--cream); border-color: var(--brown); }
+
+  .bean-detail {
+    display: grid;
+    gap: 24px;
+    background: #fff;
+    border-radius: 22px;
+    padding: 26px;
+    border: 1px solid var(--line);
+  }
+
+  @media (min-width: 820px) { .bean-detail { grid-template-columns: 1.3fr 1fr; } }
+
+  .bean-detail h3 { font-size: 28px; margin-bottom: 4px; }
+  .bean-detail .region { color: var(--accent); font-weight: 600; margin-bottom: 14px; }
+  .bean-detail .story { opacity: 0.8; margin-bottom: 18px; }
+
+  .notes-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .note-chip { padding: 6px 12px; border-radius: 999px; background: var(--cream); font-size: 13px; font-weight: 600; }
+
+  .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .fact { background: var(--paper); border-radius: 12px; padding: 12px; }
+  .fact span { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.6; font-weight: 700; }
+  .fact strong { font-size: 15px; }
+
+  .meter { margin-bottom: 14px; }
+  .meter-label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .meter-track { height: 10px; border-radius: 999px; background: var(--cream); overflow: hidden; }
+  .meter-fill { height: 100%; border-radius: 999px; background: var(--accent); transition: width 0.4s ease; }
+  .meter.roast .meter-fill { background: linear-gradient(90deg, #c9a77c, var(--rust), var(--brown)); }
+
+  /* ============ Grind guide ============ */
+  .guide-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 28px;
+  }
+
+  @media (min-width: 760px) { .guide-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .guide-item {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px;
+  }
+  .guide-item strong { display: block; margin-bottom: 4px; }
+  .guide-item p { font-size: 13px; opacity: 0.7; }
+
+  /* ============ Visit / footer ============ */
+  .visit-grid { display: grid; gap: 18px; }
+  @media (min-width: 760px) { .visit-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .visit-grid .fact { background: #fff; border: 1px solid var(--line); padding: 20px; }
+  .visit-grid .fact strong { font-family: 'Domine', serif; font-size: 18px; display: block; margin-bottom: 4px; }
+  .visit-grid .fact p { font-size: 14px; opacity: 0.75; }
+
+  footer {
+    background: var(--brown);
+    color: var(--cream);
+    padding: 40px 0;
+    font-size: 14px;
+  }
+
+  .foot { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; }
+  .foot p { opacity: 0.65; }
+
+  .signup { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .signup input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 16px;
+    border-radius: 999px;
+    border: 2px solid var(--accent);
+    background: var(--cream);
+    color: var(--brown);
+    font: 500 14px 'Work Sans', sans-serif;
+  }
+
+  /* ============ Cart drawer ============ */
+  .scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(20,10,6,0.5);
+    z-index: 90;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .scrim.open { opacity: 1; pointer-events: auto; }
+
+  .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(420px, 100%);
+    background: var(--paper);
+    z-index: 100;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -10px 0 40px rgba(0,0,0,0.2);
+  }
+
+  .drawer.open { transform: translateX(0); }
+
+  .drawer-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    background: var(--brown);
+    color: var(--cream);
+  }
+
+  .drawer-head h2 { font-size: 22px; }
+
+  .x-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(240,226,200,0.12);
+    color: var(--cream);
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .drawer-body { flex: 1; overflow-y: auto; padding: 20px; }
+
+  .line-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .line-item .li-name { font-weight: 700; }
+  .line-item .li-meta { font-size: 13px; opacity: 0.7; grid-column: 1; }
+  .line-item .li-price { font-weight: 700; text-align: right; }
+  .line-item .li-actions { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; }
+  .line-item .qty button { width: 30px; height: 30px; font-size: 16px; }
+
+  .link-btn {
+    background: none;
+    border: none;
+    color: #8a3b2e;
+    font: 600 13px 'Work Sans', sans-serif;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .empty { text-align: center; padding: 40px 10px; opacity: 0.7; }
+  .empty .big { font-size: 44px; margin-bottom: 8px; }
+
+  .drawer-foot { padding: 18px 20px; border-top: 1px solid var(--line); background: #fff; }
+
+  .totals div { display: flex; justify-content: space-between; font-size: 14px; padding: 3px 0; }
+  .totals .grand { font-family: 'Domine', serif; font-size: 20px; font-weight: 700; padding-top: 8px; }
+
+  .ship-progress { font-size: 13px; margin: 10px 0 14px; }
+  .ship-progress .meter-track { height: 6px; margin-top: 6px; }
+
+  .fulfil { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0; }
+  .fulfil .choice label { padding: 10px; text-align: center; font-size: 13px; font-weight: 600; }
+
+  .field { margin-bottom: 12px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .fine { font-size: 12px; opacity: 0.65; margin-top: 10px; }
+
+  .confirm { text-align: center; padding: 30px 10px; }
+  .confirm .big { font-size: 54px; margin-bottom: 10px; }
+  .confirm h3 { font-size: 24px; margin-bottom: 8px; }
+  .confirm .order-no { font: 700 15px ui-monospace, Menlo, monospace; background: var(--cream); display: inline-block; padding: 6px 12px; border-radius: 8px; margin: 10px 0; }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translate(-50%, 120px);
+    background: var(--accent);
+    color: var(--cream);
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 14px;
+    z-index: 120;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+    max-width: calc(100% - 32px);
+    text-align: center;
+  }
+
+  .toast.show { transform: translate(-50%, 0); }
+
+  /* phones: price + add button stay in reach while picking */
+  .mobile-bar {
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 10px 10px 18px;
+    border-radius: 999px;
+    background: var(--brown);
+    color: var(--cream);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transform: translateY(140%);
+    transition: transform 0.25s ease;
+  }
+
+  .mobile-bar.show { transform: translateY(0); }
+  .mobile-bar .mb-text { font-size: 13px; line-height: 1.25; min-width: 0; }
+  .mobile-bar .mb-text span { display: block; opacity: 0.7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mobile-bar .mb-text strong { font-family: 'Domine', serif; font-size: 18px; }
+  .mobile-bar .btn { padding: 11px 20px; flex: none; }
+
+  @media (min-width: 920px) { .mobile-bar { display: none; } }
+
+  .bean-pop {
+    position: fixed;
+    z-index: 130;
+    pointer-events: none;
+    font-size: 20px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <img src="logo.png" alt="">
+      <span>Collegeville<small>Coffee Roasters</small></span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#build">Build a bag</a>
+      <a href="#holiday">Holiday gifts</a>
+      <a href="#beans">Our beans</a>
+      <a href="#grinders">Grinders</a>
+    </nav>
+    <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+      Cart <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+  <nav class="subnav" aria-label="Sections">
+    <a href="#build">Build a bag</a>
+    <a href="#holiday">Holiday gifts</a>
+    <a href="#beans">Our beans</a>
+    <a href="#grinders">Grinders</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ============ Hero ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="pill-row">
+          <span class="pill solid">Small Batch</span>
+          <span class="pill outline">Collegeville, PA</span>
+          <span class="pill rust">Roasted to order</span>
+        </div>
+        <h1>Fresh beans, <em>your</em> grind, at your door.</h1>
+        <p class="lede">We roast in small batches right here in Collegeville and ship within days of roasting. Pick a bean, pick a grind, and we handle the rest.</p>
+        <div class="hero-ctas">
+          <a class="btn" href="#build">Build your bag</a>
+          <a class="btn ghost" href="#holiday">Shop holiday gifts</a>
+        </div>
+        <p class="origins-strip">Guatemala &middot; Ethiopia &middot; Colombia &middot; Honduras</p>
+      </div>
+      <div class="hero-bags" id="heroBags" aria-hidden="true">
+        <img class="hero-badge" src="logo.png" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Build a bag ============ -->
+  <section id="build">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Order coffee</p>
+        <h2>Build your bag in three taps</h2>
+        <p>Choose a bean, a size and a grind. Your bag fills in as you go.</p>
+      </div>
+
+      <div class="builder">
+        <div>
+          <div class="step">
+            <div class="step-title">
+              <span class="step-num">1</span> Pick your bean
+              <button class="hint" id="quizToggle" aria-expanded="false" aria-controls="quiz">Help me pick</button>
+            </div>
+
+            <div class="quiz" id="quiz" hidden>
+              <p>How do you take your coffee?</p>
+              <div class="quiz-opts" data-q="milk">
+                <button type="button" data-v="black" aria-pressed="false">Black</button>
+                <button type="button" data-v="milk" aria-pressed="false">With milk or cream</button>
+              </div>
+              <p>Which sounds best?</p>
+              <div class="quiz-opts" data-q="flavor">
+                <button type="button" data-v="choc" aria-pressed="false">Chocolate &amp; caramel</button>
+                <button type="button" data-v="fruit" aria-pressed="false">Fruity &amp; bright</button>
+                <button type="button" data-v="bold" aria-pressed="false">Bold &amp; cozy</button>
+              </div>
+              <div class="quiz-result" id="quizResult" aria-live="polite"></div>
+            </div>
+
+            <div class="choices beans" id="beanChoices" role="radiogroup" aria-label="Bean"></div>
+          </div>
+
+          <div class="step">
+            <div class="step-title"><span class="step-num">2</span> Pick a size</div>
+            <div class="choices sizes" id="sizeChoices" role="radiogroup" aria-label="Size"></div>
+          </div>
+
+          <div class="step">
+            <div class="step-title"><span class="step-num">3</span> Whole bean or ground?</div>
+            <div class="choices grinds" id="grindChoices" role="radiogroup" aria-label="Grind"></div>
+
+            <div class="addon-box" id="grinderAddon">
+              <input type="checkbox" id="addGrinder">
+              <label for="addGrinder">
+                <strong>Add a hand burr grinder (+$45)</strong>
+                Whole beans stay fresh longest. Grind right before you brew.
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <aside class="preview" aria-label="Your bag">
+          <div class="bag" id="bag">
+            <div class="bag-top"></div>
+            <div class="bag-body"></div>
+            <div class="bag-label" id="bagLabel">
+              <span class="l-brand">Collegeville Coffee Roasters</span>
+              <span class="l-name" id="bagName">Guatemala</span>
+              <span class="l-notes" id="bagNotes">milk chocolate · toffee</span>
+              <span class="l-grind" id="bagGrind">Whole bean</span>
+            </div>
+            <span class="bag-size" id="bagSize">12 oz</span>
+          </div>
+
+          <div class="summary-lines">
+            <div><span>Bean</span><span id="sumBean"></span></div>
+            <div><span>Size</span><span id="sumSize"></span></div>
+            <div><span>Grind</span><span id="sumGrind"></span></div>
+            <div id="sumGrinderRow" hidden><span>Grinder</span><span>Hand burr, $45</span></div>
+          </div>
+
+          <div class="summary-total">
+            <div class="qty" aria-label="Quantity">
+              <button type="button" id="qtyMinus" aria-label="Fewer bags">−</button>
+              <span id="qtyVal">1</span>
+              <button type="button" id="qtyPlus" aria-label="More bags">+</button>
+            </div>
+            <strong id="sumPrice">$18</strong>
+          </div>
+
+          <button class="btn block" id="addBag">Add to cart</button>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Holiday ============ -->
+  <section id="holiday" class="festive">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Holiday 2026</p>
+        <h2>Gift bundles</h2>
+        <p style="opacity:.75">Wrapped, ready to give, with a handwritten note if you want one. Order by Dec 15 for delivery before Christmas.</p>
+      </div>
+      <div class="cards" id="bundleCards"></div>
+      <p class="holiday-note">Picking up in Collegeville? Choose local pickup at checkout and skip shipping.</p>
+    </div>
+  </section>
+
+  <!-- ============ Our beans ============ -->
+  <section id="beans">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Our beans</p>
+        <h2>Where your coffee comes from</h2>
+        <p>Every bean we roast comes from a named region, and we roast it to bring out what that place does best.</p>
+      </div>
+      <div class="bean-tabs" id="beanTabs" role="tablist" aria-label="Beans"></div>
+      <div class="bean-detail" id="beanDetail" role="tabpanel"></div>
+    </div>
+  </section>
+
+  <!-- ============ Grinders ============ -->
+  <section id="grinders" class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Gear</p>
+        <h2>Grind it yourself</h2>
+        <p>Coffee loses most of its aroma within an hour of grinding. A burr grinder at home is the single biggest upgrade to your cup.</p>
+      </div>
+      <div class="cards" id="grinderCards"></div>
+    </div>
+  </section>
+
+  <!-- ============ Grind guide ============ -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Grind guide</p>
+        <h2>Which grind do I need?</h2>
+        <p>Match the grind to how you brew. Finer for quick contact with water, coarser for long soaks. When in doubt, go whole bean.</p>
+      </div>
+      <div class="guide-grid" id="guideGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============ Visit ============ -->
+  <section class="alt">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Shipping &amp; pickup</p>
+        <h2>How it gets to you</h2>
+      </div>
+      <div class="visit-grid">
+        <div class="fact"><strong>Roasted to order</strong><p>We roast Monday and Thursday. Your bag ships within 3 days of roasting, with the roast date on the label.</p></div>
+        <div class="fact"><strong>Free shipping over $50</strong><p>Flat $6 under that, anywhere in the US.</p></div>
+        <div class="fact"><strong>Local pickup</strong><p>Free pickup in Collegeville, PA. We'll email you when your order is ready.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="brand" style="margin-bottom:8px"><img src="logo.png" alt=""><span>Collegeville<small>Coffee Roasters</small></span></div>
+      <p>Small batch, roasted in Collegeville, PA. Est. 2026.</p>
+    </div>
+    <form class="signup" id="signupForm">
+      <input type="email" id="signupEmail" placeholder="coffeelover@gmail.com" required autocomplete="email" aria-label="Email address">
+      <button class="btn" type="submit">Get roast-day emails</button>
+    </form>
+  </div>
+</footer>
+
+<!-- ============ Cart drawer ============ -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Cart" aria-hidden="true">
+  <div class="drawer-head">
+    <h2 id="drawerTitle">Your cart</h2>
+    <button class="x-btn" id="closeCart" aria-label="Close cart">×</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot" id="drawerFoot"></div>
+</aside>
+
+<div class="mobile-bar" id="mobileBar" aria-hidden="true">
+  <div class="mb-text"><span id="mbName"></span><strong id="mbPrice"></strong></div>
+  <button class="btn" id="mbAdd" tabindex="-1">Add to cart</button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  // ============ Catalog ============
+  // Prices, origins and tasting notes are starting placeholders. Edit here and
+  // the whole page (builder, bean info, cart) updates from this one list.
+  const BEANS = [
+    {
+      id: 'GUA', name: 'Guatemala', farm: 'Huehuetenango', color: '#c1793a',
+      notes: ['milk chocolate', 'toffee', 'red apple'], roast: 'Medium', roastLevel: 55,
+      process: 'Washed', altitude: '1,700 m', body: 60, acidity: 55,
+      bestFor: 'Drip, espresso',
+      story: 'High mountain coffee from small family farms near the Mexican border. Sweet, balanced and easy to love. Our everyday cup.',
+      upcharge: 0,
+    },
+    {
+      id: 'ETH', name: 'Ethiopia', farm: 'Yirgacheffe', color: '#d9a441',
+      notes: ['jasmine', 'lemon', 'bergamot'], roast: 'Light', roastLevel: 25,
+      process: 'Washed', altitude: '1,900–2,100 m', body: 35, acidity: 85,
+      bestFor: 'Pour-over, AeroPress',
+      story: 'Coffee was born in Ethiopia, and Yirgacheffe shows why. Floral and tea-like. We roast it light to keep the fruit.',
+      upcharge: 2,
+    },
+    {
+      id: 'COL', name: 'Colombia', farm: 'Huila', color: '#1f6f68',
+      notes: ['caramel', 'cherry', 'cocoa'], roast: 'Medium', roastLevel: 50,
+      process: 'Washed', altitude: '1,600 m', body: 55, acidity: 60,
+      bestFor: 'Any brewer',
+      story: 'Grown on steep slopes in southern Colombia. Juicy cherry up front and a caramel finish. Works in every brewer.',
+      upcharge: 0,
+    },
+    {
+      id: 'HON', name: 'Honduras', farm: 'Marcala', color: '#8a3b2e',
+      notes: ['dark chocolate', 'brown sugar', 'almond'], roast: 'Medium-dark', roastLevel: 72,
+      process: 'Honey', altitude: '1,400 m', body: 80, acidity: 35,
+      bestFor: 'French press, cold brew',
+      story: 'Honey processed, so some of the fruit dries on the bean. Rich, round and low in acidity. Great with milk.',
+      upcharge: 0,
+    },
+    {
+      id: 'PRK', name: 'Perkiomen Blend', farm: 'Colombia + Honduras', color: '#4f6b3a',
+      notes: ['cocoa', 'molasses', 'toasted nut'], roast: 'Dark', roastLevel: 85,
+      process: 'Washed + Honey', altitude: '1,400–1,600 m', body: 90, acidity: 25,
+      bestFor: 'Espresso, drip, with milk',
+      story: 'Our house blend, named for the creek that runs through town. Bold and cozy, built for lattes and long mornings.',
+      upcharge: 0, tag: 'House blend',
+    },
+  ];
+
+  const SIZES = [
+    { id: '12', label: '12 oz', cups: '~24 cups', price: 18 },
+    { id: '32', label: '2 lb', cups: '~64 cups', price: 42, tag: 'Best value' },
+    { id: '80', label: '5 lb', cups: '~160 cups', price: 95 },
+  ];
+
+  // dots: [count, size px] for the grind-size picture
+  const GRINDS = [
+    { id: 'WB', label: 'Whole bean', sub: 'Freshest. Grind at home.', dots: 'whole', tag: 'Freshest' },
+    { id: 'ES', label: 'Espresso', sub: 'Fine, like powdered sugar', dots: [9, 3] },
+    { id: 'PO', label: 'Pour-over', sub: 'Medium-fine, like table salt', dots: [7, 5] },
+    { id: 'DR', label: 'Drip machine', sub: 'Medium, like sand', dots: [6, 6] },
+    { id: 'FP', label: 'French press', sub: 'Coarse, like sea salt', dots: [5, 8] },
+    { id: 'CB', label: 'Cold brew', sub: 'Extra coarse, like peppercorns', dots: [4, 10] },
+  ];
+
+  const GRINDERS = [
+    {
+      sku: 'CCR-GRD-HAND', name: 'Hand Burr Grinder', art: ['hand'], price: 45,
+      desc: 'Steel burrs, 18 grind settings, fits in a bag. Grinds enough for two cups in about a minute.',
+      points: ['Quiet, no power needed', 'Great for travel and camping', 'Holds 30 g of beans'],
+    },
+    {
+      sku: 'CCR-GRD-ELEC', name: 'Electric Burr Grinder', art: ['electric'], price: 129,
+      desc: 'Conical burrs, 40 settings from espresso to cold brew. One button, consistent grounds.',
+      points: ['Grinds a full pot in seconds', 'Timer for the same dose daily', 'Easy-clean removable burr'],
+    },
+  ];
+
+  const BUNDLES = [
+    {
+      sku: 'CCR-HOL-STOCK', name: 'Stocking Stuffer', price: 16, was: 20, art: ['GUA', 'ETH'],
+      desc: 'Two 4 oz bags, small enough for a stocking.',
+      points: ['Guatemala, 4 oz', 'Ethiopia, 4 oz'], grind: true,
+    },
+    {
+      sku: 'CCR-HOL-TRIO', name: 'Origin Trio', price: 32, was: 38, art: ['ETH', 'COL', 'HON'],
+      desc: 'A tasting flight from three continents. Fun to compare side by side.',
+      points: ['Ethiopia, 4 oz', 'Colombia, 4 oz', 'Honduras, 4 oz', 'Tasting card'], grind: true,
+    },
+    {
+      sku: 'CCR-HOL-RITUAL', name: 'Morning Ritual', price: 72, was: 81, art: ['PRK', 'hand', 'mug'],
+      desc: 'Everything for a better morning cup.',
+      points: ['Perkiomen Blend, 12 oz', 'Hand burr grinder', 'Collegeville stoneware mug'], grind: false, ribbon: 'Bestseller',
+    },
+    {
+      sku: 'CCR-HOL-FULL', name: 'The Full Roastery', price: 199, was: 228, art: ['GUA', 'ETH', 'COL', 'HON', 'PRK', 'electric'],
+      desc: 'One of everything we roast, plus the grinder to match. For the coffee lover who has it all.',
+      points: ['All 5 coffees, 12 oz each', 'Electric burr grinder', 'Tasting card and brew guide'], grind: true,
+    },
+  ];
+
+  const SHIP_FLAT = 6;
+  const FREE_SHIP_AT = 50;
+
+  // ============ Order wiring ============
+  // Orders and roast-day signups both go to one Google Sheet through the
+  // Apps Script in order-sheet-script.gs (setup steps are at the top of that
+  // file). Paste its Web app URL here.
+  // No payment is taken on this page; see the checkout fine print.
+  const SHEET_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzmACWmS0GQzxz_v-LaXsAUknQzkipazFIAux17T3qX313l93D4RjLw0OyIYBoPKL3w/exec';
+
+  function postToSheet(payload) {
+    if (!SHEET_WEB_APP_URL || SHEET_WEB_APP_URL.startsWith('PASTE_')) return;
+    // no-cors: Apps Script doesn't return CORS headers, so this is fire-and-forget.
+    fetch(SHEET_WEB_APP_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload),
+    }).catch(() => {});
+  }
+
+  // ============ Helpers ============
+  const $ = (id) => document.getElementById(id);
+  const money = (n) => '$' + (Number.isInteger(n) ? n : n.toFixed(2));
+  const beanById = (id) => BEANS.find((b) => b.id === id);
+  const sizeById = (id) => SIZES.find((s) => s.id === id);
+  const grindById = (id) => GRINDS.find((g) => g.id === id);
+
+  function dotsHTML(dots) {
+    if (dots === 'whole') return '<div class="grind-dots whole"><i></i><i></i><i></i></div>';
+    const [count, size] = dots;
+    return '<div class="grind-dots">' + Array.from({ length: count }, () => `<i style="width:${size}px;height:${size}px"></i>`).join('') + '</div>';
+  }
+
+  function toast(text) {
+    const t = $('toast');
+    t.textContent = text;
+    t.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => t.classList.remove('show'), 2400);
+  }
+
+  // little bean that flies from the button to the cart
+  function flyBean(fromEl) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const a = fromEl.getBoundingClientRect();
+    const b = $('cartBtn').getBoundingClientRect();
+    const el = document.createElement('div');
+    el.className = 'bean-pop';
+    el.textContent = '🫘';
+    el.style.left = a.left + a.width / 2 + 'px';
+    el.style.top = a.top + 'px';
+    document.body.appendChild(el);
+    el.animate([
+      { transform: 'translate(0,0) scale(1)', opacity: 1 },
+      { transform: `translate(${(b.left - a.left - a.width / 2) / 2}px, -80px) scale(1.4)`, opacity: 1, offset: 0.4 },
+      { transform: `translate(${b.left - a.left - a.width / 2 + 20}px, ${b.top - a.top}px) scale(0.6)`, opacity: 0.2 },
+    ], { duration: 700, easing: 'ease-in-out' }).onfinish = () => el.remove();
+  }
+
+  // ============ Cart state ============
+  const CART_KEY = 'ccr_cart_v1';
+  let cart = [];
+  try { cart = JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch (e) { cart = []; }
+
+  function saveCart() {
+    try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {}
+    renderCartCount();
+  }
+
+  function addToCart(item, sourceEl) {
+    const existing = cart.find((l) => l.sku === item.sku && (l.note || '') === (item.note || ''));
+    if (existing) existing.qty += item.qty;
+    else cart.push(item);
+    saveCart();
+    if (sourceEl) flyBean(sourceEl);
+    const btn = $('cartBtn');
+    btn.classList.remove('bump');
+    void btn.offsetWidth;
+    btn.classList.add('bump');
+    toast(`${item.name} added. Smells good already.`);
+  }
+
+  function renderCartCount() {
+    $('cartCount').textContent = cart.reduce((n, l) => n + l.qty, 0);
+  }
+
+  // ============ Builder ============
+  const pick = { bean: 'GUA', size: '12', grind: 'WB', grinder: false, qty: 1 };
+
+  function choiceHTML(group, id, inner, checked, tag) {
+    return `<div class="choice">
+      <input type="radio" name="${group}" id="${group}-${id}" value="${id}" ${checked ? 'checked' : ''}>
+      <label for="${group}-${id}">${tag ? `<span class="tag">${tag}</span>` : ''}${inner}</label>
+    </div>`;
+  }
+
+  function renderBuilderChoices() {
+    $('beanChoices').innerHTML = BEANS.map((b) => choiceHTML('bean', b.id,
+      `<span class="name"><span class="bean-swatch" style="background:${b.color}"></span>${b.name}</span>
+       <span class="sub">${b.notes.slice(0, 2).join(' · ')}</span>
+       <span class="sub">${b.roast} roast</span>`,
+      b.id === pick.bean, b.tag)).join('');
+
+    $('sizeChoices').innerHTML = SIZES.map((s) => choiceHTML('size', s.id,
+      `<span class="name">${s.label}</span>
+       <span class="size-cups">${s.cups}</span>
+       <span class="price" data-size-price="${s.id}"></span>`,
+      s.id === pick.size, s.tag)).join('');
+
+    $('grindChoices').innerHTML = GRINDS.map((g) => choiceHTML('grind', g.id,
+      `${dotsHTML(g.dots)}<span class="name">${g.label}</span><span class="sub">${g.sub}</span>`,
+      g.id === pick.grind, g.tag)).join('');
+  }
+
+  function bagSku() {
+    return `CCR-${pick.bean}-${pick.size}-${pick.grind}`;
+  }
+
+  function bagUnitPrice() {
+    return sizeById(pick.size).price + beanById(pick.bean).upcharge * (pick.size === '12' ? 1 : pick.size === '32' ? 2 : 4);
+  }
+
+  function updatePreview(wiggle) {
+    const bean = beanById(pick.bean);
+    const size = sizeById(pick.size);
+    const grind = grindById(pick.grind);
+
+    $('bagName').textContent = bean.name;
+    $('bagNotes').textContent = bean.notes.slice(0, 2).join(' · ');
+    $('bagGrind').textContent = grind.label;
+    $('bagSize').textContent = size.label;
+    $('bagLabel').style.borderTopColor = bean.color;
+
+    $('sumBean').textContent = bean.name;
+    $('sumSize').textContent = size.label;
+    $('sumGrind').textContent = grind.label;
+
+    const showAddon = pick.grind === 'WB';
+    $('grinderAddon').hidden = !showAddon;
+    if (!showAddon) { pick.grinder = false; $('addGrinder').checked = false; }
+    $('sumGrinderRow').hidden = !pick.grinder;
+
+    document.querySelectorAll('[data-size-price]').forEach((el) => {
+      const s = sizeById(el.dataset.sizePrice);
+      const mult = s.id === '12' ? 1 : s.id === '32' ? 2 : 4;
+      el.textContent = money(s.price + bean.upcharge * mult);
+    });
+
+    const total = bagUnitPrice() * pick.qty + (pick.grinder ? 45 : 0);
+    $('sumPrice').textContent = money(total);
+    $('qtyVal').textContent = pick.qty;
+    $('mbName').textContent = `${pick.qty} × ${bean.name}, ${size.label} · ${grind.label}`;
+    $('mbPrice').textContent = money(total);
+
+    if (wiggle) {
+      const bag = $('bag');
+      bag.classList.remove('wiggle');
+      void bag.offsetWidth;
+      bag.classList.add('wiggle');
+    }
+  }
+
+  function selectBean(id) {
+    pick.bean = id;
+    const input = $('bean-' + id);
+    if (input) input.checked = true;
+    updatePreview(true);
+  }
+
+  document.addEventListener('change', (e) => {
+    const t = e.target;
+    if (t.name === 'bean') { pick.bean = t.value; updatePreview(true); }
+    if (t.name === 'size') { pick.size = t.value; updatePreview(true); }
+    if (t.name === 'grind') { pick.grind = t.value; updatePreview(true); }
+    if (t.id === 'addGrinder') { pick.grinder = t.checked; updatePreview(false); }
+  });
+
+  $('qtyMinus').addEventListener('click', () => { pick.qty = Math.max(1, pick.qty - 1); updatePreview(false); });
+  $('qtyPlus').addEventListener('click', () => { pick.qty = Math.min(20, pick.qty + 1); updatePreview(false); });
+
+  $('addBag').addEventListener('click', (e) => {
+    const bean = beanById(pick.bean);
+    const size = sizeById(pick.size);
+    const grind = grindById(pick.grind);
+    addToCart({
+      sku: bagSku(),
+      name: `${bean.name}, ${size.label}`,
+      meta: grind.label,
+      price: bagUnitPrice(),
+      qty: pick.qty,
+    }, e.currentTarget);
+    if (pick.grinder) {
+      const g = GRINDERS[0];
+      addToCart({ sku: g.sku, name: g.name, meta: 'Add-on', price: g.price, qty: 1 });
+    }
+    pick.qty = 1;
+    updatePreview(false);
+  });
+
+  // ============ Help me pick quiz ============
+  const quiz = { milk: null, flavor: null };
+
+  $('quizToggle').addEventListener('click', (e) => {
+    const q = $('quiz');
+    q.hidden = !q.hidden;
+    e.currentTarget.setAttribute('aria-expanded', String(!q.hidden));
+  });
+
+  document.querySelectorAll('.quiz-opts').forEach((group) => {
+    group.addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      group.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', 'true');
+      quiz[group.dataset.q] = btn.dataset.v;
+      if (quiz.milk && quiz.flavor) {
+        const map = {
+          'black-choc': 'GUA', 'black-fruit': 'ETH', 'black-bold': 'HON',
+          'milk-choc': 'COL', 'milk-fruit': 'COL', 'milk-bold': 'PRK',
+        };
+        const id = map[`${quiz.milk}-${quiz.flavor}`];
+        const bean = beanById(id);
+        selectBean(id);
+        $('quizResult').textContent = `Try ${bean.name}: ${bean.notes.join(', ')}. We picked it for you below.`;
+      }
+    });
+  });
+
+  // ============ Grinder + bundle cards ============
+  function grindSelectHTML(id) {
+    return `<select id="${id}" aria-label="Grind">${GRINDS.map((g) => `<option value="${g.id}">${g.label}</option>`).join('')}</select>`;
+  }
+
+  // ============ Drawn product art ============
+  const ICONS = {
+    hand: `<svg viewBox="0 0 70 90" aria-hidden="true">
+      <path d="M35 34 V14 H56" fill="none" stroke="#5a3a2b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="58" cy="14" r="6" fill="#c1793a"/>
+      <rect x="22" y="30" width="26" height="10" rx="3" fill="#5a3a2b"/>
+      <rect x="20" y="38" width="30" height="48" rx="7" fill="#1f6f68"/>
+      <rect x="20" y="58" width="30" height="5" fill="#144a45"/>
+    </svg>`,
+    electric: `<svg viewBox="0 0 70 90" aria-hidden="true">
+      <path d="M18 8 H52 L46 30 H24 Z" fill="#c9a77c" opacity=".9"/>
+      <rect x="14" y="30" width="42" height="54" rx="8" fill="#3b2117"/>
+      <rect x="22" y="56" width="26" height="20" rx="4" fill="#5a3a2b"/>
+      <circle cx="35" cy="42" r="5" fill="#c1793a"/>
+    </svg>`,
+    mug: `<svg viewBox="0 0 70 90" aria-hidden="true">
+      <path d="M50 52 h6 a10 10 0 0 1 0 20 h-6" fill="none" stroke="#1f6f68" stroke-width="5"/>
+      <path d="M12 44 H52 V74 a10 10 0 0 1 -10 10 H22 a10 10 0 0 1 -10 -10 Z" fill="#1f6f68"/>
+      <path d="M24 36 q-4 -6 0 -12 M34 36 q-4 -6 0 -12" fill="none" stroke="#c9a77c" stroke-width="3" stroke-linecap="round"/>
+    </svg>`,
+  };
+
+  function miniBagHTML(beanId) {
+    const b = beanById(beanId);
+    return `<div class="mini-bag" style="--c:${b.color}"><span class="mb-label">${b.name.replace(' Blend', '')}</span></div>`;
+  }
+
+  function artHTML(list) {
+    const crowd = list.length > 4 ? ' crowd' : '';
+    return `<div class="art${crowd}" aria-hidden="true">${list.map((k) => ICONS[k] || miniBagHTML(k)).join('')}</div>`;
+  }
+
+  function renderHero() {
+    $('heroBags').insertAdjacentHTML('afterbegin', ['GUA', 'PRK', 'ETH'].map(miniBagHTML).join(''));
+  }
+
+  function renderGrinders() {
+    $('grinderCards').innerHTML = GRINDERS.map((g) => `
+      <div class="card">
+        ${artHTML(g.art)}
+        <h3>${g.name}</h3>
+        <p>${g.desc}</p>
+        <ul>${g.points.map((p) => `<li>${p}</li>`).join('')}</ul>
+        <div class="card-foot">
+          <div class="price-row"><strong>${money(g.price)}</strong></div>
+          <button class="btn block" data-add-grinder="${g.sku}">Add to cart</button>
+        </div>
+      </div>`).join('') + `
+      <div class="card" style="background:var(--brown);color:var(--cream)">
+        <h3>Not sure you need one?</h3>
+        <p style="opacity:.8">If you finish a bag in two weeks or less, pre-ground is fine. Buying the 2 lb or 5 lb bag? Go whole bean and grind as you go.</p>
+        <div class="card-foot"><a class="btn ghost block" href="#build" style="border-color:var(--cream)">Build a bag</a></div>
+      </div>`;
+
+    document.querySelectorAll('[data-add-grinder]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const g = GRINDERS.find((x) => x.sku === btn.dataset.addGrinder);
+        addToCart({ sku: g.sku, name: g.name, meta: 'Grinder', price: g.price, qty: 1 }, e.currentTarget);
+      });
+    });
+  }
+
+  function renderBundles() {
+    $('bundleCards').innerHTML = BUNDLES.map((b, i) => `
+      <div class="card">
+        ${b.ribbon ? `<span class="ribbon">${b.ribbon}</span>` : ''}
+        ${artHTML(b.art)}
+        <h3>${b.name}</h3>
+        <p>${b.desc}</p>
+        <ul>${b.points.map((p) => `<li>${p}</li>`).join('')}</ul>
+        <div class="card-foot">
+          ${b.grind ? grindSelectHTML('bundleGrind' + i) : '<p class="included">Whole bean. The grinder is in the box.</p>'}
+          <label class="gift-toggle"><input type="checkbox" data-gift-toggle="${i}"> Add a gift note (free)</label>
+          <div class="field gift-note" id="giftNote${i}" hidden style="margin:0">
+            <textarea id="giftText${i}" rows="2" maxlength="200" placeholder="Merry Christmas! Love, ..." aria-label="Gift note"></textarea>
+          </div>
+          <div class="price-row"><span><strong>${money(b.price)}</strong><span class="was">${money(b.was)}</span></span></div>
+          <button class="btn block" data-add-bundle="${i}">Add gift to cart</button>
+        </div>
+      </div>`).join('');
+
+    document.querySelectorAll('[data-gift-toggle]').forEach((cb) => {
+      cb.addEventListener('change', () => { $('giftNote' + cb.dataset.giftToggle).hidden = !cb.checked; });
+    });
+
+    document.querySelectorAll('[data-add-bundle]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const i = btn.dataset.addBundle;
+        const b = BUNDLES[i];
+        const grindId = b.grind ? $('bundleGrind' + i).value : 'WB';
+        const giftOn = document.querySelector(`[data-gift-toggle="${i}"]`).checked;
+        const note = giftOn ? $('giftText' + i).value.trim() : '';
+        addToCart({
+          sku: `${b.sku}-${grindId}`,
+          name: b.name,
+          meta: grindById(grindId).label + (note ? ' · gift note' : ''),
+          note,
+          price: b.price,
+          qty: 1,
+        }, e.currentTarget);
+      });
+    });
+  }
+
+  // ============ Bean info ============
+  function renderBeanInfo(id) {
+    $('beanTabs').innerHTML = BEANS.map((b) =>
+      `<button role="tab" aria-selected="${b.id === id}" data-bean-tab="${b.id}">${b.name}</button>`).join('');
+
+    const b = beanById(id);
+    $('beanDetail').innerHTML = `
+      <div>
+        <h3><span class="bean-swatch" style="background:${b.color};width:18px;height:18px"></span>${b.name}</h3>
+        <p class="region">${b.farm}</p>
+        <p class="story">${b.story}</p>
+        <div class="notes-row">${b.notes.map((n) => `<span class="note-chip">${n}</span>`).join('')}</div>
+        <div class="facts">
+          <div class="fact"><span>Process</span><strong>${b.process}</strong></div>
+          <div class="fact"><span>Altitude</span><strong>${b.altitude}</strong></div>
+          <div class="fact"><span>Roast</span><strong>${b.roast}</strong></div>
+          <div class="fact"><span>Best for</span><strong>${b.bestFor}</strong></div>
+        </div>
+      </div>
+      <div>
+        <div class="meter roast"><div class="meter-label"><span>Roast</span><span>${b.roast}</span></div><div class="meter-track"><div class="meter-fill" style="width:${b.roastLevel}%"></div></div></div>
+        <div class="meter"><div class="meter-label"><span>Body</span><span>${b.body < 45 ? 'Light' : b.body < 70 ? 'Medium' : 'Full'}</span></div><div class="meter-track"><div class="meter-fill" style="width:${b.body}%"></div></div></div>
+        <div class="meter"><div class="meter-label"><span>Brightness</span><span>${b.acidity < 45 ? 'Low' : b.acidity < 70 ? 'Medium' : 'High'}</span></div><div class="meter-track"><div class="meter-fill" style="width:${b.acidity}%;background:var(--rust)"></div></div></div>
+        <button class="btn block" data-order-bean="${b.id}" style="margin-top:12px">Order ${b.name}</button>
+      </div>`;
+
+    document.querySelectorAll('[data-bean-tab]').forEach((t) =>
+      t.addEventListener('click', () => renderBeanInfo(t.dataset.beanTab)));
+    document.querySelector('[data-order-bean]').addEventListener('click', (e) => {
+      selectBean(e.currentTarget.dataset.orderBean);
+      $('build').scrollIntoView();
+    });
+  }
+
+  function renderGuide() {
+    const uses = {
+      WB: 'Keeps flavor 2 to 3 times longer. Needs a grinder.',
+      ES: 'Espresso machines and stovetop moka pots.',
+      PO: 'V60, Chemex, Kalita and AeroPress.',
+      DR: 'Auto-drip machines and flat-bottom filters.',
+      FP: 'French press, percolators and steeping.',
+      CB: 'Overnight cold brew and Toddy systems.',
+    };
+    $('guideGrid').innerHTML = GRINDS.map((g) => `
+      <div class="guide-item">${dotsHTML(g.dots)}<strong>${g.label}</strong><p>${uses[g.id]}</p></div>`).join('');
+  }
+
+  // ============ Cart drawer + checkout ============
+  let fulfil = 'ship';
+  let view = 'cart';
+
+  function totals() {
+    const sub = cart.reduce((n, l) => n + l.price * l.qty, 0);
+    const ship = fulfil === 'pickup' || sub >= FREE_SHIP_AT || sub === 0 ? 0 : SHIP_FLAT;
+    return { sub, ship, total: sub + ship };
+  }
+
+  function openCart() {
+    view = 'cart';
+    renderDrawer();
+    $('drawer').classList.add('open');
+    $('drawer').setAttribute('aria-hidden', 'false');
+    $('scrim').classList.add('open');
+    $('closeCart').focus();
+  }
+
+  function closeCart() {
+    $('drawer').classList.remove('open');
+    $('drawer').setAttribute('aria-hidden', 'true');
+    $('scrim').classList.remove('open');
+  }
+
+  $('cartBtn').addEventListener('click', openCart);
+  $('closeCart').addEventListener('click', closeCart);
+  $('scrim').addEventListener('click', closeCart);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCart(); });
+
+  function fulfilHTML() {
+    return `<div class="fulfil" role="radiogroup" aria-label="Delivery">
+      ${choiceHTML('fulfil', 'ship', 'Ship to me', fulfil === 'ship')}
+      ${choiceHTML('fulfil', 'pickup', 'Pick up in Collegeville', fulfil === 'pickup')}
+    </div>`;
+  }
+
+  function totalsHTML() {
+    const t = totals();
+    const left = FREE_SHIP_AT - t.sub;
+    const progress = fulfil === 'ship' && t.sub > 0
+      ? `<div class="ship-progress">${left > 0 ? `You're ${money(left)} from free shipping` : 'Free shipping unlocked 🎉'}
+           <div class="meter-track"><div class="meter-fill" style="width:${Math.min(100, (t.sub / FREE_SHIP_AT) * 100)}%"></div></div></div>`
+      : '';
+    return `${progress}<div class="totals">
+      <div><span>Subtotal</span><span>${money(t.sub)}</span></div>
+      <div><span>${fulfil === 'pickup' ? 'Pickup' : 'Shipping'}</span><span>${t.ship ? money(t.ship) : 'Free'}</span></div>
+      <div class="grand"><span>Total</span><span>${money(t.total)}</span></div>
+    </div>`;
+  }
+
+  function renderDrawer() {
+    const body = $('drawerBody');
+    const foot = $('drawerFoot');
+
+    if (view === 'done') return;
+
+    if (!cart.length) {
+      $('drawerTitle').textContent = 'Your cart';
+      body.innerHTML = `<div class="empty"><div class="big">☕</div><p>Your cart is empty.<br>Let's fix that.</p></div>`;
+      foot.innerHTML = `<button class="btn block" id="goBuild">Build a bag</button>`;
+      $('goBuild').addEventListener('click', () => { closeCart(); $('build').scrollIntoView(); });
+      return;
+    }
+
+    if (view === 'cart') {
+      $('drawerTitle').textContent = 'Your cart';
+      body.innerHTML = cart.map((l, i) => `
+        <div class="line-item">
+          <span class="li-name">${l.name}</span>
+          <span class="li-price">${money(l.price * l.qty)}</span>
+          <span class="li-meta">${l.meta}</span>
+          <div class="li-actions">
+            <div class="qty">
+              <button type="button" data-line-minus="${i}" aria-label="Fewer">−</button>
+              <span>${l.qty}</span>
+              <button type="button" data-line-plus="${i}" aria-label="More">+</button>
+            </div>
+            <button class="link-btn" data-line-remove="${i}">Remove</button>
+          </div>
+        </div>`).join('') + fulfilHTML();
+      foot.innerHTML = totalsHTML() + `<button class="btn block" id="toCheckout" style="margin-top:14px">Checkout</button>`;
+      $('toCheckout').addEventListener('click', () => { view = 'checkout'; renderDrawer(); });
+      return;
+    }
+
+    // checkout view
+    $('drawerTitle').textContent = 'Checkout';
+    body.innerHTML = `
+      <form id="checkoutForm">
+        ${fulfilHTML()}
+        <div class="field"><label for="coName">Name</label><input id="coName" required autocomplete="name"></div>
+        <div class="field"><label for="coEmail">Email</label><input id="coEmail" type="email" required autocomplete="email"></div>
+        <div class="field"><label for="coPhone">Phone (optional)</label><input id="coPhone" type="tel" autocomplete="tel"></div>
+        <div id="addrFields" ${fulfil === 'pickup' ? 'hidden' : ''}>
+          <div class="field"><label for="coAddr">Street address</label><input id="coAddr" autocomplete="street-address"></div>
+          <div class="field-row">
+            <div class="field"><label for="coCity">City</label><input id="coCity" autocomplete="address-level2"></div>
+            <div class="field"><label for="coZip">ZIP</label><input id="coZip" autocomplete="postal-code" inputmode="numeric"></div>
+          </div>
+        </div>
+        <div class="field"><label for="coNotes">Anything else? (optional)</label><textarea id="coNotes" rows="2"></textarea></div>
+        <button type="button" class="link-btn" id="backToCart">← Back to cart</button>
+      </form>`;
+    foot.innerHTML = totalsHTML() + `
+      <button class="btn block" id="placeOrder" style="margin-top:14px">Place order</button>
+      <p class="fine">No payment is taken here. We'll email you within a day to confirm your order and send a secure payment link.</p>`;
+
+    $('backToCart').addEventListener('click', () => { view = 'cart'; renderDrawer(); });
+    $('placeOrder').addEventListener('click', placeOrder);
+  }
+
+  // drawer-level delegation for qty buttons and delivery choice
+  $('drawer').addEventListener('click', (e) => {
+    const t = e.target.closest('button');
+    if (!t) return;
+    if (t.dataset.linePlus !== undefined) { cart[t.dataset.linePlus].qty++; saveCart(); renderDrawer(); }
+    if (t.dataset.lineMinus !== undefined) {
+      const l = cart[t.dataset.lineMinus];
+      l.qty--;
+      if (l.qty < 1) cart.splice(t.dataset.lineMinus, 1);
+      saveCart(); renderDrawer();
+    }
+    if (t.dataset.lineRemove !== undefined) { cart.splice(t.dataset.lineRemove, 1); saveCart(); renderDrawer(); }
+  });
+
+  $('drawer').addEventListener('change', (e) => {
+    if (e.target.name !== 'fulfil') return;
+    fulfil = e.target.value;
+    if (view === 'checkout') {
+      $('addrFields').hidden = fulfil === 'pickup';
+      // refresh totals only, so typed form values survive
+      const foot = $('drawerFoot');
+      foot.querySelectorAll('.ship-progress, .totals').forEach((n) => n.remove());
+      foot.insertAdjacentHTML('afterbegin', totalsHTML());
+    } else {
+      renderDrawer();
+    }
+  });
+
+  function placeOrder() {
+    const form = $('checkoutForm');
+    const needAddr = fulfil === 'ship';
+    ['coAddr', 'coCity', 'coZip'].forEach((id) => { $(id).required = needAddr; });
+    if (!form.reportValidity()) return;
+
+    const t = totals();
+    const orderNo = 'CCR-' + Date.now().toString(36).toUpperCase().slice(-6);
+    const order = {
+      type: 'order',
+      orderNo,
+      submittedAt: new Date().toISOString(),
+      name: $('coName').value.trim(),
+      email: $('coEmail').value.trim(),
+      phone: $('coPhone').value.trim(),
+      fulfillment: fulfil,
+      address: needAddr ? `${$('coAddr').value.trim()}, ${$('coCity').value.trim()} ${$('coZip').value.trim()}` : '',
+      notes: $('coNotes').value.trim(),
+      items: cart.map((l) => ({ sku: l.sku, name: l.name, detail: l.meta, giftNote: l.note || '', qty: l.qty, unitPrice: l.price })),
+      subtotal: t.sub,
+      shipping: t.ship,
+      total: t.total,
+    };
+    postToSheet(order);
+
+    cart = [];
+    saveCart();
+    view = 'done';
+    $('drawerTitle').textContent = 'Order placed';
+    $('drawerBody').innerHTML = `
+      <div class="confirm">
+        <div class="big">🎉</div>
+        <h3>Thanks, ${order.name.split(' ')[0]}!</h3>
+        <p>Your order is in the roasting queue.</p>
+        <div class="order-no">${orderNo}</div>
+        <p style="font-size:14px;opacity:.75">We'll email ${order.email} to confirm and send a payment link. ${fulfil === 'pickup' ? "We'll let you know when it's ready to pick up in Collegeville." : 'Your coffee ships within 3 days of roasting.'}</p>
+      </div>`;
+    $('drawerFoot').innerHTML = `<button class="btn block" id="doneBtn">Keep browsing</button>`;
+    $('doneBtn').addEventListener('click', closeCart);
+  }
+
+  // ============ Footer signup ============
+  $('signupForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = $('signupEmail').value.trim();
+    postToSheet({ type: 'signup', email, submittedAt: new Date().toISOString() });
+    e.target.reset();
+    toast("You're on the list. We'll email you on roast days.");
+  });
+
+  // ============ Phone add bar ============
+  // shows while the builder is on screen but its own Add button isn't
+  (function () {
+    const bar = $('mobileBar');
+    const vis = { build: false, add: false };
+    const sync = () => {
+      const show = vis.build && !vis.add;
+      bar.classList.toggle('show', show);
+      bar.setAttribute('aria-hidden', String(!show));
+      $('mbAdd').tabIndex = show ? 0 : -1;
+    };
+    new IntersectionObserver(([e]) => { vis.build = e.isIntersecting; sync(); }).observe($('build'));
+    new IntersectionObserver(([e]) => { vis.add = e.isIntersecting; sync(); }).observe($('addBag'));
+    $('mbAdd').addEventListener('click', () => $('addBag').click());
+  })();
+
+  // ============ Init ============
+  renderHero();
+  renderBuilderChoices();
+  updatePreview(false);
+  renderGrinders();
+  renderBundles();
+  renderBeanInfo('GUA');
+  renderGuide();
+  renderCartCount();
+</script>
+</body>
+</html>
