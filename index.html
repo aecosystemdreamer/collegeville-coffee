@@ -831,17 +831,53 @@
   .visit-grid .fact p { font-size: 14px; color: var(--brown-soft); }
 
   /* ============ Footer ============ */
-  footer { background: var(--brown); color: var(--cream); padding: 56px 0; font-size: 14px; }
+  footer { background: var(--brown); color: var(--cream); padding: 80px 0 28px; font-size: 14px; }
 
-  .foot { display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between; align-items: flex-end; }
-  .foot p { color: rgba(251,247,241,0.65); }
-  footer .brand span small { color: rgba(251,247,241,0.6); }
+  .foot-grid { display: grid; gap: 48px; padding-bottom: 56px; }
 
-  .signup { display: flex; gap: 0; flex-wrap: wrap; min-width: min(100%, 420px); }
+  @media (min-width: 760px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px) { .foot-grid { grid-template-columns: 1.3fr 0.8fr 1fr 1.4fr; gap: 40px; } }
+
+  .foot-logo {
+    width: 148px;
+    height: 148px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 6px rgba(251,247,241,0.08);
+    margin-bottom: 22px;
+  }
+
+  .foot-brand p { color: rgba(251,247,241,0.7); max-width: 260px; }
+
+  .foot-col h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #d9a77c;
+    margin-bottom: 18px;
+  }
+
+  .foot-col a { display: block; color: var(--cream); text-decoration: none; padding: 4px 0; }
+  .foot-col a:hover { color: #d9a77c; }
+  .foot-col p { color: rgba(251,247,241,0.7); margin-bottom: 8px; }
+  .foot-col .next { font-family: var(--serif); font-style: italic; font-size: 26px; color: var(--cream); line-height: 1.2; margin-bottom: 12px; }
+
+  .foot-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(251,247,241,0.15);
+    font-size: 12px;
+    color: rgba(251,247,241,0.55);
+  }
+
+  .signup { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
 
   .signup input {
-    flex: 1;
-    min-width: 200px;
+    flex: 1 1 200px;
     padding: 14px 0;
     border: none;
     border-bottom: 1px solid rgba(251,247,241,0.5);
@@ -852,7 +888,7 @@
 
   .signup input::placeholder { color: rgba(251,247,241,0.5); }
   .signup input:focus { outline: none; border-bottom-color: var(--cream); }
-  .signup .btn { background: transparent; border-color: rgba(251,247,241,0.5); color: var(--cream); margin-left: 12px; }
+  .signup .btn { background: transparent; border-color: rgba(251,247,241,0.5); color: var(--cream); }
   .signup .btn:hover { background: var(--cream); color: var(--brown); }
 
   /* ============ Cart drawer ============ */
@@ -1238,16 +1274,36 @@
 </main>
 
 <footer>
-  <div class="wrap foot">
-    <div>
-      <div class="brand" style="margin-bottom:8px"><img src="logo.png" alt=""><span>Collegeville<small>Coffee Roasters</small></span></div>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <img class="foot-logo" src="logo.png" alt="Collegeville Coffee Roasters, Est. 2026">
       <p>Small batch, roasted in Collegeville, PA. Est. 2026.</p>
-      <p class="coords">40.18° N · 75.45° W</p>
     </div>
-    <form class="signup" id="signupForm">
-      <input type="email" id="signupEmail" placeholder="coffeelover@gmail.com" required autocomplete="email" aria-label="Email address">
-      <button class="btn" type="submit">Get roast-day emails</button>
-    </form>
+    <nav class="foot-col" aria-label="Shop">
+      <h4>Shop</h4>
+      <a href="#build">Build a bag</a>
+      <a href="#holiday">Holiday gifts</a>
+      <a href="#beans">Our beans</a>
+      <a href="#grinders">Grinders</a>
+    </nav>
+    <div class="foot-col">
+      <h4>Roast log</h4>
+      <p class="next" id="footNext"></p>
+      <p>We roast Monday and Thursday.</p>
+      <p>Free pickup in Collegeville.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Roast-day emails</h4>
+      <p>One short email when a fresh batch comes off the roaster. Nothing else.</p>
+      <form class="signup" id="signupForm">
+        <input type="email" id="signupEmail" placeholder="coffeelover@gmail.com" required autocomplete="email" aria-label="Email address">
+        <button class="btn" type="submit">Sign up</button>
+      </form>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>&copy; 2026 Collegeville Coffee Roasters</span>
+    <span class="coords">40.18° N · 75.45° W</span>
   </div>
 </footer>
 
@@ -1652,6 +1708,7 @@
     $('nextRoastLong').textContent = longDate(NEXT_ROAST);
     $('orderBy').textContent = `Order by ${DAY_LONG[cutoff.getDay()]} night`;
     $('factNext').textContent = longDate(NEXT_ROAST);
+    $('footNext').textContent = `Next roast ${longDate(NEXT_ROAST)}`;
   }
 
   function renderGrinders() {
