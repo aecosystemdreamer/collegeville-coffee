@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Collegeville Coffee Roasters: small-batch, ultra-fresh coffee roasted in Collegeville, PA. Order whole bean or ground, add a grinder, or send a holiday gift bundle.">
+<meta name="description" content="Collegeville Coffee Roasters: small-batch, ultra-fresh coffee roasted in Collegeville, PA. Order whole bean or ground to your brewer, with a handwritten note if you like.">
 <title>Collegeville Coffee Roasters</title>
 <link rel="icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@500&display=swap" rel="stylesheet">
 <style>
   /* Editorial look on cool neutrals: refined serif, hairlines, square edges.
      Espresso is the action color; teal marks what's selected and labels. */
@@ -26,6 +26,7 @@
     --serif: 'Cormorant Garamond', Georgia, serif;
     --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+    --hand: 'Caveat', 'Bradley Hand', cursive;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -52,7 +53,7 @@
 
   /* small uppercase label used for nav, buttons, eyebrows */
   /* roast-log labels: typewriter caps for nav, buttons, eyebrows and stamps */
-  .eyebrow, .nav-links a, .subnav a, .btn, .cart-btn, .tag, .ribbon, .hint, .origins-strip, .pill {
+  .eyebrow, .nav-links a, .subnav a, .btn, .cart-btn, .tag, .hint, .origins-strip, .pill {
     font-family: var(--mono);
     font-size: 11px;
     font-weight: 500;
@@ -458,22 +459,6 @@
     transform: translateX(-50%) rotate(12deg);
   }
 
-  .addon-box {
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    margin-top: 16px;
-    padding: 16px;
-    border: 1px solid var(--line);
-    border-radius: 2px;
-    background: #fff;
-  }
-
-  .addon-box[hidden] { display: none; }
-  .addon-box input { width: 16px; height: 16px; margin-top: 3px; accent-color: var(--accent); flex: none; }
-  .addon-box label { cursor: pointer; font-size: 14px; color: var(--brown-soft); }
-  .addon-box strong { display: block; font-weight: 500; color: var(--brown); }
-
   .qty {
     display: inline-flex;
     align-items: center;
@@ -600,60 +585,7 @@
   .quiz-opts button[aria-pressed="true"] { border-color: var(--brown); background: var(--brown); color: var(--cream); }
   .quiz-result { font-size: 14px; color: var(--accent); min-height: 20px; }
 
-  /* ============ Holiday (one dark band) ============ */
-  .festive { background: var(--brown); color: var(--cream); }
-  .festive .eyebrow { color: var(--accent-light); }
-  .festive .section-head p, .festive .holiday-note { color: rgba(255,255,255,0.72); }
-
-  /* ============ Product cards (grinders, bundles) ============ */
-  .cards { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
-  #bundleCards { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
-
-  .card {
-    background: #fff;
-    color: var(--brown);
-    border: 1px solid var(--line);
-    border-radius: 2px;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-
-  .festive .card { border-color: transparent; }
-
-  .card .art {
-    height: 150px;
-    margin: -24px -24px 22px;
-    background: var(--sand);
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 8px;
-    padding-bottom: 20px;
-    overflow: hidden;
-  }
-
-  .alt .card .art { background: var(--paper); }
-  .card .art .mini-bag { --w: 58px; }
-  .card .art .mb-label { font-size: 0; }
-  .card .art svg { width: 64px; height: 84px; flex: none; }
-  .card .art.crowd { gap: 5px; }
-  .card .art.crowd .mini-bag { --w: 36px; }
-  .card .art.crowd svg { width: 44px; height: 58px; }
-
-  .card h3 { font-size: 28px; font-style: italic; margin-bottom: 8px; }
-  .card p { font-size: 14px; color: var(--brown-soft); margin-bottom: 14px; }
-  .card ul { list-style: none; font-size: 14px; margin-bottom: 18px; border-top: 1px solid var(--line); }
-  .card li { padding: 8px 0; border-bottom: 1px solid var(--line); }
-  .card .included { font-size: 13px; color: var(--brown-soft); margin: 0; }
-
-  .card .card-foot { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
-  .card .price-row { display: flex; justify-content: space-between; align-items: baseline; }
-  .card .price-row strong { font-family: var(--serif); font-size: 30px; font-weight: 500; }
-  .card .was { text-decoration: line-through; color: var(--brown-soft); font-size: 14px; margin-left: 8px; }
-
-  .card select, .field input, .field select, .field textarea {
+  .field input, .field select, .field textarea {
     width: 100%;
     padding: 11px 12px;
     border-radius: 2px;
@@ -663,26 +595,7 @@
     color: var(--brown);
   }
 
-  .card select:focus, .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
-
-  .gift-toggle { font-size: 13px; display: flex; gap: 8px; align-items: center; cursor: pointer; color: var(--brown-soft); }
-  .gift-toggle input { accent-color: var(--accent); width: 15px; height: 15px; }
-  .gift-note[hidden] { display: none; }
-
-  .ribbon {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    z-index: 1;
-    border: 1.5px solid var(--accent);
-    color: var(--accent);
-    font-size: 10px;
-    padding: 4px 8px;
-    transform: rotate(-4deg);
-    background: rgba(255,255,255,0.85);
-  }
-
-  .holiday-note { margin-top: 32px; font-size: 14px; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
 
   /* ============ Bean info ============ */
   .bean-layout { display: grid; gap: 40px; align-items: start; }
@@ -768,23 +681,7 @@
   .statement-facts li { padding: 20px 8px 0; font-size: 14px; }
   .statement-facts span { display: block; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--brown-soft); margin-bottom: 6px; }
 
-  /* ============ Gift steps ============ */
-  .section-head h2 em { font-style: italic; }
-  .festive .section-head h2 em { color: var(--accent-light); }
-
-  .gift-steps {
-    list-style: none;
-    display: grid;
-    gap: 0 32px;
-    margin: -16px 0 48px;
-    border-top: 1px solid rgba(255,255,255,0.2);
-  }
-
-  @media (min-width: 760px) { .gift-steps { grid-template-columns: repeat(3, 1fr); } }
-
-  .gift-steps li { display: flex; gap: 14px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.2); font-size: 14px; color: rgba(255,255,255,0.85); }
-  .gift-steps span { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--accent-light); }
-
+  /* ============ Roast ticket details ============ */
   .ticket-head {
     display: flex;
     justify-content: space-between;
@@ -806,8 +703,113 @@
   .bd-art .stamp { position: absolute; top: 18px; right: 18px; width: 84px; height: 84px; font-size: 9px; }
 
   .coords { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
-  .gift-steps span, .step-num { font-family: var(--mono); font-style: normal; font-size: 13px; }
+  .step-num { font-family: var(--mono); font-style: normal; font-size: 13px; }
   .step-num::before { content: "No. 0"; }
+
+  /* ============ Note step + handwritten tag ============ */
+  .optional { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brown-soft); }
+  .note-lede { color: var(--brown-soft); font-size: 14px; margin: -8px 0 16px; }
+
+  .note-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+
+  .note-chips button {
+    padding: 8px 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: #fff;
+    font: 400 14px var(--hand);
+    font-size: 19px;
+    line-height: 1;
+    color: var(--brown);
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .note-chips button:hover { border-color: var(--accent); color: var(--accent); }
+
+  .note-field { position: relative; }
+
+  .note-field textarea {
+    width: 100%;
+    padding: 14px 16px 26px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background:
+      repeating-linear-gradient(180deg, transparent 0, transparent 31px, rgba(31,111,104,0.18) 31px, rgba(31,111,104,0.18) 32px) #fff;
+    background-position: 0 10px;
+    font-family: var(--hand);
+    font-size: 24px;
+    line-height: 32px;
+    color: var(--accent-dark);
+    resize: none;
+  }
+
+  .note-field textarea:focus { outline: none; border-color: var(--accent); }
+  .note-field textarea::placeholder { color: rgba(42,26,18,0.3); }
+  .note-count { position: absolute; right: 12px; bottom: 8px; font: 400 11px var(--mono); color: var(--brown-soft); }
+
+  /* the tag hangs off the bag's corner on a teal string */
+  .note-tag {
+    position: absolute;
+    top: 104px;
+    right: -84px;
+    width: 100px;
+    min-height: 64px;
+    padding: 18px 10px 10px;
+    background: #e7f1ef;
+    border: 1px solid var(--line-strong);
+    border-radius: 3px 3px 3px 3px;
+    clip-path: polygon(14% 0, 86% 0, 100% 14%, 100% 100%, 0 100%, 0 14%);
+    transform: rotate(7deg);
+    transform-origin: 50% 0;
+    font-family: var(--hand);
+    font-size: 17px;
+    line-height: 1.05;
+    color: var(--accent-dark);
+    text-align: center;
+    overflow-wrap: anywhere;
+    animation: tag-in 0.4s ease;
+  }
+
+  .note-tag::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    margin-left: -3.5px;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    background: var(--paper);
+  }
+
+  .note-tag[hidden] { display: none; }
+
+  /* string from the bag to the tag */
+  .bag:has(.note-tag:not([hidden]))::after {
+    content: "";
+    position: absolute;
+    top: 30px;
+    right: -2px;
+    width: 1.5px;
+    height: 88px;
+    background: var(--accent);
+    transform: rotate(-24deg);
+    transform-origin: top;
+  }
+
+  @keyframes tag-in {
+    from { opacity: 0; transform: rotate(-6deg) translateY(-6px); }
+    to { opacity: 1; transform: rotate(7deg); }
+  }
+
+  .line-item .li-note { grid-column: 1 / -1; font-family: var(--hand); font-size: 19px; color: var(--accent-dark); }
+
+  @media (max-width: 520px) {
+    .note-tag { right: -70px; width: 90px; font-size: 15px; }
+    .bag:has(.note-tag:not([hidden]))::after { height: 84px; transform: rotate(-19deg); }
+  }
 
   .assure { margin-top: 12px; font-size: 12px; color: var(--brown-soft); text-align: center; }
   .assure::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: 1px; }
@@ -1053,9 +1055,8 @@
     </a>
     <nav class="nav-links" aria-label="Main">
       <a href="#build">Build a bag</a>
-      <a href="#holiday">Holiday gifts</a>
       <a href="#beans">Our beans</a>
-      <a href="#grinders">Grinders</a>
+      <a href="#guide">Grind guide</a>
     </nav>
     <button class="cart-btn" id="cartBtn" aria-label="Open cart">
       Cart <span class="cart-count" id="cartCount">0</span>
@@ -1063,9 +1064,7 @@
   </div>
   <nav class="subnav" aria-label="Sections">
     <a href="#build">Build a bag</a>
-    <a href="#holiday">Holiday gifts</a>
     <a href="#beans">Our beans</a>
-    <a href="#grinders">Grinders</a>
   </nav>
 </header>
 
@@ -1084,7 +1083,7 @@
         <p class="lede">We roast in small batches right here in Collegeville and ship within days of roasting. Pick a bean, pick a grind, and we handle the rest.</p>
         <div class="hero-ctas">
           <a class="btn" href="#build">Build your bag</a>
-          <a class="btn ghost" href="#holiday">Shop holiday gifts</a>
+          <a class="btn ghost" href="#beans">Meet the beans</a>
         </div>
         <p class="origins-strip">Guatemala &middot; Ethiopia &middot; Colombia &middot; Honduras</p>
       </div>
@@ -1157,13 +1156,20 @@
           <div class="step">
             <div class="step-title"><span class="step-num">3</span> Whole bean or ground?</div>
             <div class="choices grinds" id="grindChoices" role="radiogroup" aria-label="Grind"></div>
+          </div>
 
-            <div class="addon-box" id="grinderAddon">
-              <input type="checkbox" id="addGrinder">
-              <label for="addGrinder">
-                <strong>Add a hand burr grinder (+$45)</strong>
-                Whole beans stay fresh longest. Grind right before you brew.
-              </label>
+          <div class="step">
+            <div class="step-title"><span class="step-num">4</span> Add a note <span class="optional">optional</span></div>
+            <p class="note-lede">Ordering for someone, or just for you? We'll write it by hand on a tag and tie it to the bag.</p>
+            <div class="note-chips" aria-label="Note ideas">
+              <button type="button" data-note="Happy birthday! Enjoy every cup.">Happy birthday</button>
+              <button type="button" data-note="Thank you, truly. This one's on me.">Thank you</button>
+              <button type="button" data-note="Just because. Hope your mornings get a little better.">Just because</button>
+              <button type="button" data-note="For you, from me, with love.">With love</button>
+            </div>
+            <div class="note-field">
+              <textarea id="noteText" rows="3" maxlength="120" placeholder="Happy Monday, Dad. This one's bright and fruity." aria-label="Note for the tag"></textarea>
+              <span class="note-count" id="noteCount">0 / 120</span>
             </div>
           </div>
         </div>
@@ -1181,6 +1187,7 @@
               <span class="l-grind" id="bagGrind">Whole bean</span>
             </div>
             <span class="bag-size" id="bagSize">12 oz</span>
+            <div class="note-tag" id="noteTag" hidden aria-hidden="true"><span id="noteTagText"></span></div>
           </div>
 
           <div class="summary-lines">
@@ -1188,7 +1195,7 @@
             <div><span>Size</span><span id="sumSize"></span></div>
             <div><span>Grind</span><span id="sumGrind"></span></div>
             <div><span>Roasts on</span><span id="sumRoast"></span></div>
-            <div id="sumGrinderRow" hidden><span>Grinder</span><span>Hand burr, $45</span></div>
+            <div id="sumNoteRow" hidden><span>Note</span><span>Handwritten tag</span></div>
           </div>
 
           <div class="summary-total">
@@ -1207,24 +1214,6 @@
     </div>
   </section>
 
-  <!-- ============ Holiday ============ -->
-  <section id="holiday" class="festive">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">'Tis the season</p>
-        <h2>Give the gift of a <em>better morning</em></h2>
-        <p>Wrapped, ready to give, with a handwritten note if you want one. Order by Dec 15 for delivery before Christmas.</p>
-      </div>
-      <ol class="gift-steps">
-        <li><span>01</span>Choose a bundle and a grind</li>
-        <li><span>02</span>Add a handwritten note, free</li>
-        <li><span>03</span>We ship it to them, or you pick it up</li>
-      </ol>
-      <div class="cards" id="bundleCards"></div>
-      <p class="holiday-note">Picking up in Collegeville? Choose local pickup at checkout and skip shipping.</p>
-    </div>
-  </section>
-
   <!-- ============ Our beans ============ -->
   <section id="beans">
     <div class="wrap">
@@ -1240,20 +1229,8 @@
     </div>
   </section>
 
-  <!-- ============ Grinders ============ -->
-  <section id="grinders" class="alt">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Gear</p>
-        <h2>Grind it yourself</h2>
-        <p>Coffee loses most of its aroma within an hour of grinding. A burr grinder at home is the single biggest upgrade to your cup.</p>
-      </div>
-      <div class="cards" id="grinderCards"></div>
-    </div>
-  </section>
-
   <!-- ============ Grind guide ============ -->
-  <section>
+  <section id="guide" class="alt">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Grind guide</p>
@@ -1275,9 +1252,7 @@
     <nav class="foot-col" aria-label="Shop">
       <h4>Shop</h4>
       <a href="#build">Build a bag</a>
-      <a href="#holiday">Holiday gifts</a>
       <a href="#beans">Our beans</a>
-      <a href="#grinders">Grinders</a>
     </nav>
     <div class="foot-col">
       <h4>Roast log</h4>
@@ -1414,42 +1389,6 @@
     { id: 'CB', label: 'Cold brew', sub: 'Extra coarse, like peppercorns', dots: [4, 10] },
   ];
 
-  const GRINDERS = [
-    {
-      sku: 'CCR-GRD-HAND', name: 'Hand Burr Grinder', art: ['hand'], price: 45,
-      desc: 'Steel burrs, 18 grind settings, fits in a bag. Grinds enough for two cups in about a minute.',
-      points: ['Quiet, no power needed', 'Great for travel and camping', 'Holds 30 g of beans'],
-    },
-    {
-      sku: 'CCR-GRD-ELEC', name: 'Electric Burr Grinder', art: ['electric'], price: 129,
-      desc: 'Conical burrs, 40 settings from espresso to cold brew. One button, consistent grounds.',
-      points: ['Grinds a full pot in seconds', 'Timer for the same dose daily', 'Easy-clean removable burr'],
-    },
-  ];
-
-  const BUNDLES = [
-    {
-      sku: 'CCR-HOL-STOCK', name: 'Stocking Stuffer', price: 16, was: 20, art: ['GUA', 'ETH'],
-      desc: 'Two 4 oz bags, small enough for a stocking.',
-      points: ['Guatemala, 4 oz', 'Ethiopia, 4 oz'], grind: true,
-    },
-    {
-      sku: 'CCR-HOL-TRIO', name: 'Origin Trio', price: 32, was: 38, art: ['ETH', 'COL', 'HON'],
-      desc: 'A tasting flight from three continents. Fun to compare side by side.',
-      points: ['Ethiopia, 4 oz', 'Colombia, 4 oz', 'Honduras, 4 oz', 'Tasting card'], grind: true,
-    },
-    {
-      sku: 'CCR-HOL-RITUAL', name: 'Morning Ritual', price: 72, was: 81, art: ['PRK', 'hand', 'mug'],
-      desc: 'Everything for a better morning cup.',
-      points: ['Perkiomen Blend, 12 oz', 'Hand burr grinder', 'Collegeville stoneware mug'], grind: false, ribbon: 'Bestseller',
-    },
-    {
-      sku: 'CCR-HOL-FULL', name: 'The Full Roastery', price: 199, was: 228, art: ['GUA', 'ETH', 'COL', 'HON', 'PRK', 'electric'],
-      desc: 'One of everything we roast, plus the grinder to match. For the coffee lover who has it all.',
-      points: ['All 5 coffees, 12 oz each', 'Electric burr grinder', 'Tasting card and brew guide'], grind: true,
-    },
-  ];
-
   const SHIP_FLAT = 6;
   const FREE_SHIP_AT = 50;
 
@@ -1515,7 +1454,7 @@
   }
 
   // ============ Builder ============
-  const pick = { bean: 'GUA', size: '12', grind: 'WB', grinder: false, qty: 1 };
+  const pick = { bean: 'GUA', size: '12', grind: 'WB', note: '', qty: 1 };
 
   function choiceHTML(group, id, inner, checked, tag) {
     return `<div class="choice">
@@ -1569,10 +1508,10 @@
     $('sumSize').textContent = size.label;
     $('sumGrind').textContent = grind.label;
 
-    const showAddon = pick.grind === 'WB';
-    $('grinderAddon').hidden = !showAddon;
-    if (!showAddon) { pick.grinder = false; $('addGrinder').checked = false; }
-    $('sumGrinderRow').hidden = !pick.grinder;
+    $('noteTag').hidden = !pick.note;
+    $('noteTagText').textContent = pick.note;
+    $('sumNoteRow').hidden = !pick.note;
+    $('noteCount').textContent = `${pick.note.length} / 120`;
 
     document.querySelectorAll('[data-size-price]').forEach((el) => {
       const s = sizeById(el.dataset.sizePrice);
@@ -1580,7 +1519,7 @@
       el.textContent = money(s.price + bean.upcharge * mult);
     });
 
-    const total = bagUnitPrice() * pick.qty + (pick.grinder ? 45 : 0);
+    const total = bagUnitPrice() * pick.qty;
     $('sumPrice').textContent = money(total);
     $('qtyVal').textContent = pick.qty;
     $('mbName').textContent = `${pick.qty} × ${bean.name}, ${size.label} · ${grind.label}`;
@@ -1600,11 +1539,21 @@
     if (t.name === 'bean') { pick.bean = t.value; updatePreview(); }
     if (t.name === 'size') { pick.size = t.value; updatePreview(); }
     if (t.name === 'grind') { pick.grind = t.value; updatePreview(); }
-    if (t.id === 'addGrinder') { pick.grinder = t.checked; updatePreview(); }
   });
 
   $('qtyMinus').addEventListener('click', () => { pick.qty = Math.max(1, pick.qty - 1); updatePreview(); });
   $('qtyPlus').addEventListener('click', () => { pick.qty = Math.min(20, pick.qty + 1); updatePreview(); });
+
+  // note: typing or tapping an idea writes it onto the tag on the bag
+  $('noteText').addEventListener('input', (e) => { pick.note = e.target.value.trim(); updatePreview(); });
+  document.querySelectorAll('[data-note]').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      $('noteText').value = chip.dataset.note;
+      pick.note = chip.dataset.note;
+      updatePreview();
+      $('noteText').focus();
+    });
+  });
 
   $('addBag').addEventListener('click', (e) => {
     const bean = beanById(pick.bean);
@@ -1613,15 +1562,14 @@
     addToCart({
       sku: bagSku(),
       name: `${bean.name}, ${size.label}`,
-      meta: grind.label,
+      meta: grind.label + (pick.note ? ' · with a note' : ''),
+      note: pick.note,
       price: bagUnitPrice(),
       qty: pick.qty,
     });
-    if (pick.grinder) {
-      const g = GRINDERS[0];
-      addToCart({ sku: g.sku, name: g.name, meta: 'Add-on', price: g.price, qty: 1 });
-    }
     pick.qty = 1;
+    pick.note = '';
+    $('noteText').value = '';
     updatePreview();
   });
 
@@ -1654,41 +1602,9 @@
     });
   });
 
-  // ============ Grinder + bundle cards ============
-  function grindSelectHTML(id) {
-    return `<select id="${id}" aria-label="Grind">${GRINDS.map((g) => `<option value="${g.id}">${g.label}</option>`).join('')}</select>`;
-  }
-
-  // ============ Drawn product art ============
-  const ICONS = {
-    hand: `<svg viewBox="0 0 70 90" aria-hidden="true">
-      <path d="M35 34 V14 H56" fill="none" stroke="#5a3a2b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="58" cy="14" r="6" fill="#c1793a"/>
-      <rect x="22" y="30" width="26" height="10" rx="3" fill="#5a3a2b"/>
-      <rect x="20" y="38" width="30" height="48" rx="7" fill="#1f6f68"/>
-      <rect x="20" y="58" width="30" height="5" fill="#144a45"/>
-    </svg>`,
-    electric: `<svg viewBox="0 0 70 90" aria-hidden="true">
-      <path d="M18 8 H52 L46 30 H24 Z" fill="#9fb8b4" opacity=".9"/>
-      <rect x="14" y="30" width="42" height="54" rx="8" fill="#3b2117"/>
-      <rect x="22" y="56" width="26" height="20" rx="4" fill="#5a3a2b"/>
-      <circle cx="35" cy="42" r="5" fill="#c1793a"/>
-    </svg>`,
-    mug: `<svg viewBox="0 0 70 90" aria-hidden="true">
-      <path d="M50 52 h6 a10 10 0 0 1 0 20 h-6" fill="none" stroke="#1f6f68" stroke-width="5"/>
-      <path d="M12 44 H52 V74 a10 10 0 0 1 -10 10 H22 a10 10 0 0 1 -10 -10 Z" fill="#1f6f68"/>
-      <path d="M24 36 q-4 -6 0 -12 M34 36 q-4 -6 0 -12" fill="none" stroke="#9fb8b4" stroke-width="3" stroke-linecap="round"/>
-    </svg>`,
-  };
-
   function miniBagHTML(beanId) {
     const b = beanById(beanId);
     return `<div class="mini-bag" style="--c:${b.color}"><span class="mb-label">${b.name.replace(' Blend', '')}</span></div>`;
-  }
-
-  function artHTML(list) {
-    const crowd = list.length > 4 ? ' crowd' : '';
-    return `<div class="art${crowd}" aria-hidden="true">${list.map((k) => ICONS[k] || miniBagHTML(k)).join('')}</div>`;
   }
 
   function renderHero() {
@@ -1702,74 +1618,6 @@
     $('orderBy').textContent = `Order by ${DAY_LONG[cutoff.getDay()]} night`;
     $('factNext').textContent = longDate(NEXT_ROAST);
     $('footNext').textContent = `Next roast ${longDate(NEXT_ROAST)}`;
-  }
-
-  function renderGrinders() {
-    $('grinderCards').innerHTML = GRINDERS.map((g) => `
-      <div class="card">
-        ${artHTML(g.art)}
-        <h3>${g.name}</h3>
-        <p>${g.desc}</p>
-        <ul>${g.points.map((p) => `<li>${p}</li>`).join('')}</ul>
-        <div class="card-foot">
-          <div class="price-row"><strong>${money(g.price)}</strong></div>
-          <button class="btn ghost block" data-add-grinder="${g.sku}">Add to cart</button>
-        </div>
-      </div>`).join('') + `
-      <div class="card" style="background:transparent;border-color:var(--line-strong)">
-        <h3>Not sure you need one?</h3>
-        <p>If you finish a bag in two weeks or less, pre-ground is fine. Buying the 2 lb or 5 lb bag? Go whole bean and grind as you go.</p>
-        <div class="card-foot"><a class="btn ghost block" href="#build">Build a bag</a></div>
-      </div>`;
-
-    document.querySelectorAll('[data-add-grinder]').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        const g = GRINDERS.find((x) => x.sku === btn.dataset.addGrinder);
-        addToCart({ sku: g.sku, name: g.name, meta: 'Grinder', price: g.price, qty: 1 });
-      });
-    });
-  }
-
-  function renderBundles() {
-    $('bundleCards').innerHTML = BUNDLES.map((b, i) => `
-      <div class="card">
-        ${b.ribbon ? `<span class="ribbon">${b.ribbon}</span>` : ''}
-        ${artHTML(b.art)}
-        <h3>${b.name}</h3>
-        <p>${b.desc}</p>
-        <ul>${b.points.map((p) => `<li>${p}</li>`).join('')}</ul>
-        <div class="card-foot">
-          ${b.grind ? grindSelectHTML('bundleGrind' + i) : '<p class="included">Whole bean. The grinder is in the box.</p>'}
-          <label class="gift-toggle"><input type="checkbox" data-gift-toggle="${i}"> Add a gift note (free)</label>
-          <div class="field gift-note" id="giftNote${i}" hidden style="margin:0">
-            <textarea id="giftText${i}" rows="2" maxlength="200" placeholder="Merry Christmas! Love, ..." aria-label="Gift note"></textarea>
-          </div>
-          <div class="price-row"><span><strong>${money(b.price)}</strong><span class="was">${money(b.was)}</span></span></div>
-          <button class="btn ghost block" data-add-bundle="${i}">Add gift to cart</button>
-        </div>
-      </div>`).join('');
-
-    document.querySelectorAll('[data-gift-toggle]').forEach((cb) => {
-      cb.addEventListener('change', () => { $('giftNote' + cb.dataset.giftToggle).hidden = !cb.checked; });
-    });
-
-    document.querySelectorAll('[data-add-bundle]').forEach((btn) => {
-      btn.addEventListener('click', (e) => {
-        const i = btn.dataset.addBundle;
-        const b = BUNDLES[i];
-        const grindId = b.grind ? $('bundleGrind' + i).value : 'WB';
-        const giftOn = document.querySelector(`[data-gift-toggle="${i}"]`).checked;
-        const note = giftOn ? $('giftText' + i).value.trim() : '';
-        addToCart({
-          sku: `${b.sku}-${grindId}`,
-          name: b.name,
-          meta: grindById(grindId).label + (note ? ' · gift note' : ''),
-          note,
-          price: b.price,
-          qty: 1,
-        });
-      });
-    });
   }
 
   // ============ Bean info ============
@@ -1808,7 +1656,7 @@
 
   function renderGuide() {
     const uses = {
-      WB: 'Keeps flavor 2 to 3 times longer. Needs a grinder.',
+      WB: 'Keeps flavor 2 to 3 times longer. Grind right before you brew.',
       ES: 'Espresso machines and stovetop moka pots.',
       PO: 'V60, Chemex, Kalita and AeroPress.',
       DR: 'Auto-drip machines and flat-bottom filters.',
@@ -1892,6 +1740,7 @@
           <span class="li-name">${l.name}</span>
           <span class="li-price">${money(l.price * l.qty)}</span>
           <span class="li-meta">${l.meta}</span>
+          ${l.note ? `<span class="li-note">“${l.note}”</span>` : ''}
           <div class="li-actions">
             <div class="qty">
               <button type="button" data-line-minus="${i}" aria-label="Fewer">−</button>
@@ -2030,8 +1879,6 @@
   renderHero();
   renderBuilderChoices();
   updatePreview();
-  renderGrinders();
-  renderBundles();
   renderBeanInfo('GUA');
   renderGuide();
   renderCartCount();
