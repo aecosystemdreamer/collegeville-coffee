@@ -10,19 +10,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* Editorial look: refined serif, hairlines, square edges, lots of air.
-     Espresso is the action color, teal marks what's selected, copper is
-     for small labels only. */
+  /* Editorial look on cool neutrals: refined serif, hairlines, square edges.
+     Espresso is the action color; teal marks what's selected and labels. */
   :root {
     --brown: #2a1a12;
-    --brown-soft: #6b5546;
-    --cream: #fbf7f1;
-    --paper: #fbf7f1;
-    --sand: #f3ece2;
+    --brown-soft: #5c5753;
+    --cream: #ffffff;
+    --paper: #f7f8f7;
+    --sand: #eceeed;
     --accent: #1f6f68;
     --accent-dark: #144a45;
-    --rust: #b8693a;
-    --rust-dark: #9a5220;
+    --accent-light: #8cc4bc;
     --line: rgba(42,26,18,0.14);
     --line-strong: rgba(42,26,18,0.4);
     --serif: 'Cormorant Garamond', Georgia, serif;
@@ -67,7 +65,7 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(251,247,241,0.95);
+    background: rgba(247,248,247,0.95);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line);
   }
@@ -152,7 +150,7 @@
 
   @media (min-width: 860px) { .hero-grid { grid-template-columns: 1.15fr 1fr; } }
 
-  .pill-row { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 28px; color: var(--rust-dark); }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 28px; color: var(--accent-dark); }
 
   .hero h1 { font-size: clamp(44px, 6.4vw, 84px); margin-bottom: 24px; }
   .hero h1 em { font-style: italic; color: var(--accent); }
@@ -231,7 +229,7 @@
     top: 32%;
     height: 34%;
     background: var(--cream);
-    border-top: calc(var(--w) * 0.035) solid var(--c, var(--rust));
+    border-top: calc(var(--w) * 0.035) solid var(--c, var(--accent));
     display: grid;
     place-items: center;
     text-align: center;
@@ -248,10 +246,10 @@
     position: relative;
     padding: 28px 28px 24px 56px;
     border: 1px solid var(--line-strong);
-    background-color: #fffdf8;
+    background-color: #ffffff;
     /* ruled notebook paper with a copper margin line */
     background-image:
-      linear-gradient(90deg, transparent 39px, rgba(184,105,58,0.45) 39px, rgba(184,105,58,0.45) 40px, transparent 40px),
+      linear-gradient(90deg, transparent 39px, rgba(31,111,104,0.35) 39px, rgba(31,111,104,0.35) 40px, transparent 40px),
       repeating-linear-gradient(180deg, transparent 0, transparent 35px, rgba(42,26,18,0.08) 35px, rgba(42,26,18,0.08) 36px);
     box-shadow: 8px 8px 0 var(--sand);
     font-family: var(--mono);
@@ -265,7 +263,7 @@
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--rust-dark);
+    color: var(--accent-dark);
   }
 
   .log-table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -310,11 +308,11 @@
     opacity: 0.85;
   }
 
-  .log-card .stamp { position: absolute; bottom: -34px; right: -18px; background: rgba(255,253,248,0.92); }
+  .log-card .stamp { position: absolute; bottom: -34px; right: -18px; background: rgba(255,255,255,0.92); }
 
   @media (max-width: 520px) {
     .log-card { padding: 24px 16px 20px 48px; background-image:
-      linear-gradient(90deg, transparent 31px, rgba(184,105,58,0.45) 31px, rgba(184,105,58,0.45) 32px, transparent 32px),
+      linear-gradient(90deg, transparent 31px, rgba(31,111,104,0.35) 31px, rgba(31,111,104,0.35) 32px, transparent 32px),
       repeating-linear-gradient(180deg, transparent 0, transparent 35px, rgba(42,26,18,0.08) 35px, rgba(42,26,18,0.08) 36px); }
     .log-table th:nth-child(4), .log-table td:nth-child(4) { display: none; }
     .log-card .stamp { width: 78px; height: 78px; font-size: 9px; right: -4px; bottom: -40px; }
@@ -331,7 +329,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    color: var(--rust-dark);
+    color: var(--accent-dark);
     margin-bottom: 18px;
   }
 
@@ -432,7 +430,7 @@
     left: 12px;
     padding: 0 6px;
     background: var(--paper);
-    color: var(--rust-dark);
+    color: var(--accent-dark);
     font-size: 9px;
     line-height: 14px;
     white-space: nowrap;
@@ -538,7 +536,7 @@
     height: 118px;
     background: var(--cream);
     color: var(--brown);
-    border-top: 4px solid var(--rust);
+    border-top: 4px solid var(--accent);
     padding: 10px 8px;
     text-align: center;
     display: flex;
@@ -604,8 +602,8 @@
 
   /* ============ Holiday (one dark band) ============ */
   .festive { background: var(--brown); color: var(--cream); }
-  .festive .eyebrow { color: #d9a77c; }
-  .festive .section-head p, .festive .holiday-note { color: rgba(251,247,241,0.72); }
+  .festive .eyebrow { color: var(--accent-light); }
+  .festive .section-head p, .festive .holiday-note { color: rgba(255,255,255,0.72); }
 
   /* ============ Product cards (grinders, bundles) ============ */
   .cards { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
@@ -681,7 +679,7 @@
     font-size: 10px;
     padding: 4px 8px;
     transform: rotate(-4deg);
-    background: rgba(255,253,248,0.85);
+    background: rgba(255,255,255,0.85);
   }
 
   .holiday-note { margin-top: 32px; font-size: 14px; }
@@ -732,7 +730,7 @@
 
   .bd-art .mini-bag { --w: 100px; }
 
-  .bean-detail .region { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--rust-dark); margin-bottom: 10px; }
+  .bean-detail .region { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 10px; }
   .bean-detail .tastes { font-family: var(--serif); font-style: italic; font-size: 26px; line-height: 1.25; margin-bottom: 14px; }
   .bean-detail .story { color: var(--brown-soft); margin-bottom: 24px; }
 
@@ -772,20 +770,20 @@
 
   /* ============ Gift steps ============ */
   .section-head h2 em { font-style: italic; }
-  .festive .section-head h2 em { color: #d9a77c; }
+  .festive .section-head h2 em { color: var(--accent-light); }
 
   .gift-steps {
     list-style: none;
     display: grid;
     gap: 0 32px;
     margin: -16px 0 48px;
-    border-top: 1px solid rgba(251,247,241,0.2);
+    border-top: 1px solid rgba(255,255,255,0.2);
   }
 
   @media (min-width: 760px) { .gift-steps { grid-template-columns: repeat(3, 1fr); } }
 
-  .gift-steps li { display: flex; gap: 14px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid rgba(251,247,241,0.2); font-size: 14px; color: rgba(251,247,241,0.85); }
-  .gift-steps span { font-family: var(--serif); font-style: italic; font-size: 18px; color: #d9a77c; }
+  .gift-steps li { display: flex; gap: 14px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.2); font-size: 14px; color: rgba(255,255,255,0.85); }
+  .gift-steps span { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--accent-light); }
 
   .ticket-head {
     display: flex;
@@ -797,10 +795,10 @@
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--rust-dark);
+    color: var(--accent-dark);
   }
 
-  .l-batch { font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; color: var(--rust-dark); margin-bottom: 4px; }
+  .l-batch { font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em; color: var(--accent-dark); margin-bottom: 4px; }
   .summary-lines div span:last-child, .spec dd, .statement-facts b { font-family: var(--mono); font-weight: 500; font-size: 13px; }
   .statement-facts b { display: block; font-size: 14px; }
 
@@ -839,9 +837,9 @@
   @media (min-width: 1000px) { .foot-grid { grid-template-columns: 1.3fr 0.8fr 1fr 1.4fr; gap: 40px; } }
 
   .foot-name { font-family: var(--serif); font-size: 34px; line-height: 1.05; margin-bottom: 18px; }
-  .foot-name em { display: block; font-style: italic; color: #d9a77c; }
+  .foot-name em { display: block; font-style: italic; color: var(--accent-light); }
 
-  .foot-brand p { color: rgba(251,247,241,0.7); max-width: 260px; }
+  .foot-brand p { color: rgba(255,255,255,0.7); max-width: 260px; }
 
   .foot-col h4 {
     font-family: var(--mono);
@@ -849,13 +847,13 @@
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #d9a77c;
+    color: var(--accent-light);
     margin-bottom: 18px;
   }
 
   .foot-col a { display: block; color: var(--cream); text-decoration: none; padding: 4px 0; }
-  .foot-col a:hover { color: #d9a77c; }
-  .foot-col p { color: rgba(251,247,241,0.7); margin-bottom: 8px; }
+  .foot-col a:hover { color: var(--accent-light); }
+  .foot-col p { color: rgba(255,255,255,0.7); margin-bottom: 8px; }
   .foot-col .next { font-family: var(--serif); font-style: italic; font-size: 26px; color: var(--cream); line-height: 1.2; margin-bottom: 12px; }
 
   .foot-bottom {
@@ -864,9 +862,9 @@
     justify-content: space-between;
     gap: 8px 24px;
     padding-top: 24px;
-    border-top: 1px solid rgba(251,247,241,0.15);
+    border-top: 1px solid rgba(255,255,255,0.15);
     font-size: 12px;
-    color: rgba(251,247,241,0.55);
+    color: rgba(255,255,255,0.55);
   }
 
   .signup { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
@@ -875,15 +873,15 @@
     flex: 1 1 200px;
     padding: 14px 0;
     border: none;
-    border-bottom: 1px solid rgba(251,247,241,0.5);
+    border-bottom: 1px solid rgba(255,255,255,0.5);
     background: transparent;
     color: var(--cream);
     font: 400 15px var(--sans);
   }
 
-  .signup input::placeholder { color: rgba(251,247,241,0.5); }
+  .signup input::placeholder { color: rgba(255,255,255,0.5); }
   .signup input:focus { outline: none; border-bottom-color: var(--cream); }
-  .signup .btn { background: transparent; border-color: rgba(251,247,241,0.5); color: var(--cream); }
+  .signup .btn { background: transparent; border-color: rgba(255,255,255,0.5); color: var(--cream); }
   .signup .btn:hover { background: var(--cream); color: var(--brown); }
 
   /* ============ Cart drawer ============ */
@@ -1078,9 +1076,9 @@
     <div class="wrap hero-grid">
       <div>
         <div class="pill-row">
-          <span class="pill solid">Small Batch</span>
-          <span class="pill outline">Collegeville, PA</span>
-          <span class="pill rust">Roasted to order</span>
+          <span class="pill">Small Batch</span>
+          <span class="pill">Collegeville, PA</span>
+          <span class="pill">Roasted to order</span>
         </div>
         <h1>Fresh beans, <em>your</em> grind, at your door.</h1>
         <p class="lede">We roast in small batches right here in Collegeville and ship within days of roasting. Pick a bean, pick a grind, and we handle the rest.</p>
@@ -1334,7 +1332,7 @@
       upcharge: 0,
     },
     {
-      id: 'ETH', name: 'Ethiopia', farm: 'Yirgacheffe', color: '#d9a441',
+      id: 'ETH', name: 'Ethiopia', farm: 'Yirgacheffe', color: '#5b8fa8',
       notes: ['jasmine', 'lemon', 'bergamot'], roast: 'Light', roastLevel: 25,
       process: 'Washed', altitude: '1,900–2,100 m', body: 35, acidity: 85,
       bestFor: 'Pour-over, AeroPress',
@@ -1671,7 +1669,7 @@
       <rect x="20" y="58" width="30" height="5" fill="#144a45"/>
     </svg>`,
     electric: `<svg viewBox="0 0 70 90" aria-hidden="true">
-      <path d="M18 8 H52 L46 30 H24 Z" fill="#c9a77c" opacity=".9"/>
+      <path d="M18 8 H52 L46 30 H24 Z" fill="#9fb8b4" opacity=".9"/>
       <rect x="14" y="30" width="42" height="54" rx="8" fill="#3b2117"/>
       <rect x="22" y="56" width="26" height="20" rx="4" fill="#5a3a2b"/>
       <circle cx="35" cy="42" r="5" fill="#c1793a"/>
@@ -1679,7 +1677,7 @@
     mug: `<svg viewBox="0 0 70 90" aria-hidden="true">
       <path d="M50 52 h6 a10 10 0 0 1 0 20 h-6" fill="none" stroke="#1f6f68" stroke-width="5"/>
       <path d="M12 44 H52 V74 a10 10 0 0 1 -10 10 H22 a10 10 0 0 1 -10 -10 Z" fill="#1f6f68"/>
-      <path d="M24 36 q-4 -6 0 -12 M34 36 q-4 -6 0 -12" fill="none" stroke="#c9a77c" stroke-width="3" stroke-linecap="round"/>
+      <path d="M24 36 q-4 -6 0 -12 M34 36 q-4 -6 0 -12" fill="none" stroke="#9fb8b4" stroke-width="3" stroke-linecap="round"/>
     </svg>`,
   };
 
